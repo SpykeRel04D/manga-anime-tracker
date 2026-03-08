@@ -17,7 +17,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **SRCH-01**: User can search anime by title via AniList API with debounced input
 - [x] **SRCH-02**: User can search manga by title via AniList API with debounced input
-- [ ] **SRCH-03**: Search results display cover art, title, type, airing status, and episode/chapter count
+- [x] **SRCH-03**: Search results display cover art, title, type, airing status, and episode/chapter count
 
 ### Tracking
 
@@ -104,7 +104,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-03 | Phase 2: Authentication | Complete |
 | SRCH-01 | Phase 3: Search and API Integration | Complete |
 | SRCH-02 | Phase 3: Search and API Integration | Complete |
-| SRCH-03 | Phase 3: Search and API Integration | Pending |
+| SRCH-03 | Phase 3: Search and API Integration | Complete |
 | TRCK-01 | Phase 4: Core Tracking | Pending |
 | TRCK-02 | Phase 4: Core Tracking | Pending |
 | TRCK-03 | Phase 4: Core Tracking | Pending |
