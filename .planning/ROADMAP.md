@@ -46,10 +46,11 @@ Plans:
   2. User can log in with email and password from a login page and is redirected to the main app
   3. User session persists across browser refresh and tab close/reopen without requiring re-login
   4. Unauthenticated users are redirected to the login page when trying to access protected routes
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md -- Better Auth setup, database schema changes (users table + auth tables), server/client config, API route handler, proxy.ts route protection, registration lock tests
+- [ ] 02-02-PLAN.md -- Auth UI: login page, signup page, route group restructuring, auth-aware nav bar with logout dropdown, visual verification
 
 ### Phase 3: Search and API Integration
 **Goal**: Users can search for any anime or manga by title and see rich search results -- establishing the AniList API adapter with rate limiting and caching that all future features depend on
@@ -104,7 +105,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation and Design System | 3/3 | Complete   | 2026-03-08 |
-| 2. Authentication | 0/1 | Not started | - |
+| 2. Authentication | 0/2 | Not started | - |
 | 3. Search and API Integration | 0/1 | Not started | - |
 | 4. Core Tracking | 0/2 | Not started | - |
 | 5. List UI and Browsing | 0/2 | Not started | - |
