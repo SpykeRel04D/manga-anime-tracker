@@ -12,7 +12,7 @@ This roadmap delivers a personal anime/manga tracking application in five phases
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation and Design System** - Project scaffolding, Docker DX, database, Hexagonal DDD structure, warm dark theme, responsive layout, and i18n scaffolding
+- [ ] **Phase 1: Foundation and Design System** - Project scaffolding, Docker DX, database, Hexagonal DDD structure, warm dark theme, responsive layout, and placeholder UI
 - [ ] **Phase 2: Authentication** - Email/password signup, login, and persistent sessions
 - [ ] **Phase 3: Search and API Integration** - AniList GraphQL adapter with rate limiting, anime/manga search with debounced input
 - [ ] **Phase 4: Core Tracking** - Add/remove series, status management, episode/chapter progress, ratings, and notes
@@ -21,20 +21,20 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Phase Details
 
 ### Phase 1: Foundation and Design System
-**Goal**: A working development environment with the Hexagonal DDD project structure, database, warm dark theme, responsive layout, and trilingual i18n -- so every subsequent phase builds on correct architecture and design foundations
+**Goal**: A working development environment with the Hexagonal DDD project structure, database, warm dark theme with amber accents, responsive placeholder page, and Docker DX -- so every subsequent phase builds on correct architecture and design foundations
 **Depends on**: Nothing (first phase)
 **Requirements**: INFR-01, INFR-02, INFR-03, INFR-04, DSGN-01, DSGN-02, DSGN-03, DSGN-04
 **Success Criteria** (what must be TRUE):
   1. Running `make up` starts the local development environment (Docker PostgreSQL + Next.js dev server) and the app loads in the browser
   2. The app displays a placeholder page using the warm cozy dark theme (warm dark tones, soft borders, amber accents) with responsive layout that adapts from mobile to desktop
-  3. The app renders in English by default, and switching to Spanish or Catalan shows translated placeholder text (no hardcoded strings)
+  3. English only for v1 (DSGN-03 and DSGN-04 deferred per user decision)
   4. The codebase follows the Hexagonal DDD folder structure (domain, application, infrastructure, UI layers) with at least the auth and tracking bounded contexts scaffolded
   5. The database is accessible via Drizzle ORM with initial schema migrations applied (Neon for production, Docker PostgreSQL for local)
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md -- Infrastructure scaffolding: Next.js 16, Docker DX, Drizzle ORM, Hexagonal DDD structure, ESLint/Prettier config
+- [ ] 01-02-PLAN.md -- Design system: warm dark theme, shadcn/ui, nav bar, responsive skeleton grid, visual verification
 
 ### Phase 2: Authentication
 **Goal**: Users can securely create an account and log in, with sessions that survive browser refresh -- gating all future tracking features behind user identity
@@ -102,7 +102,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation and Design System | 0/2 | Not started | - |
+| 1. Foundation and Design System | 0/2 | Planning complete | - |
 | 2. Authentication | 0/1 | Not started | - |
 | 3. Search and API Integration | 0/1 | Not started | - |
 | 4. Core Tracking | 0/2 | Not started | - |
