@@ -49,12 +49,19 @@ export function SignupForm({ registrationOpen }: SignupFormProps): ReactElement 
 function SignupFormFields(): ReactElement {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
     setError('')
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.')
+      return
+    }
+
     setLoading(true)
 
     const result = await authClient.signUp.email({
@@ -103,8 +110,28 @@ function SignupFormFields(): ReactElement {
               minLength={8}
               value={password}
               onChange={e => setPassword(e.target.value)}
-              placeholder="Choose a password (8+ characters)"
+              placeholder="Choose a password"
             />
+            <p className="text-xs text-muted-foreground">
+              Must be at least 8 characters.
+            </p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="confirm-password">Confirm password</Label>
+            <Input
+              id="confirm-password"
+              type="password"
+              required
+              minLength={8}
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              placeholder="Re-enter your password"
+            />
+            {confirmPassword.length > 0 && password !== confirmPassword && (
+              <p className="text-xs text-destructive">
+                Passwords do not match.
+              </p>
+            )}
           </div>
           {error && (
             <p className="text-sm text-destructive">{error}</p>
