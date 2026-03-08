@@ -30,11 +30,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. English only for v1 (DSGN-03 and DSGN-04 deferred per user decision)
   4. The codebase follows the Hexagonal DDD folder structure (domain, application, infrastructure, UI layers) with at least the auth and tracking bounded contexts scaffolded
   5. The database is accessible via Drizzle ORM with initial schema migrations applied (Neon for production, Docker PostgreSQL for local)
-**Plans:** 2 plans
+**Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md -- Infrastructure scaffolding: Next.js 16, Docker DX, Drizzle ORM, Hexagonal DDD structure, ESLint/Prettier config
-- [ ] 01-02-PLAN.md -- Design system: warm dark theme, shadcn/ui, nav bar, responsive skeleton grid, visual verification
+- [ ] 01-01-PLAN.md -- Next.js 16 scaffolding, Docker DX with Makefile, ESLint/Prettier/PostCSS config, Vitest setup
+- [ ] 01-02-PLAN.md -- Hexagonal DDD folder structure, Drizzle ORM schema (users + tracking), environment-aware DB connection, infrastructure tests
+- [ ] 01-03-PLAN.md -- Design system: warm dark theme, shadcn/ui, nav bar, responsive skeleton grid, visual verification
 
 ### Phase 2: Authentication
 **Goal**: Users can securely create an account and log in, with sessions that survive browser refresh -- gating all future tracking features behind user identity
@@ -102,7 +103,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation and Design System | 0/2 | Planning complete | - |
+| 1. Foundation and Design System | 0/3 | Planning complete | - |
 | 2. Authentication | 0/1 | Not started | - |
 | 3. Search and API Integration | 0/1 | Not started | - |
 | 4. Core Tracking | 0/2 | Not started | - |
