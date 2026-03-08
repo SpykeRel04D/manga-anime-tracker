@@ -7,6 +7,7 @@ import { db } from '@/db/drizzle'
 import * as schema from '@/db/schema'
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL ?? 'http://localhost:3000',
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: {
@@ -16,6 +17,16 @@ export const auth = betterAuth({
   }),
   user: {
     modelName: 'users',
+  },
+  advanced: {
+    database: {
+      generateId: (options) => {
+        if (options.model === 'user' || options.model === 'users') {
+          return false // Let PostgreSQL generate UUID via defaultRandom()
+        }
+        return crypto.randomUUID()
+      },
+    },
   },
   emailAndPassword: {
     enabled: true,
