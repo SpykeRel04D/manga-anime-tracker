@@ -1,11 +1,4 @@
-import {
-  integer,
-  pgEnum,
-  pgTable,
-  text,
-  timestamp,
-  uuid,
-} from 'drizzle-orm/pg-core'
+import { integer, pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 
 import { users } from './users'
 
@@ -35,10 +28,6 @@ export const trackingEntries = pgTable('tracking_entries', {
   coverImageUrl: text('cover_image_url'),
   totalEpisodes: integer('total_episodes'),
   totalChapters: integer('total_chapters'),
-  createdAt: timestamp('created_at', { withTimezone: true })
-    .defaultNow()
-    .notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true })
-    .defaultNow()
-    .notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 })

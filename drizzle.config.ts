@@ -11,8 +11,6 @@ export default defineConfig({
   out: './src/db/migrations',
   dialect: 'postgresql',
   dbCredentials: {
-    url: isProd
-      ? process.env.NEON_DATABASE_URL!
-      : process.env.LOCAL_DATABASE_URL!,
+    url: isProd ? process.env.NEON_DATABASE_URL! : process.env.LOCAL_DATABASE_URL!,
   },
 })

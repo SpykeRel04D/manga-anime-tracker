@@ -1,12 +1,7 @@
 import { getTableColumns } from 'drizzle-orm'
 import { describe, expect, it } from 'vitest'
 
-import {
-  mediaTypeEnum,
-  trackingEntries,
-  trackingStatusEnum,
-  users,
-} from '@/db/schema'
+import { mediaTypeEnum, trackingEntries, trackingStatusEnum, users } from '@/db/schema'
 
 describe('Drizzle schema exports', () => {
   it('exports users table', () => {
