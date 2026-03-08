@@ -1,9 +1,15 @@
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 
-export default function Home(): ReactNode {
+import { NavBar } from '@/components/layout/nav-bar'
+import { PlaceholderGrid } from '@/components/shared/placeholder-grid'
+
+export default function Home(): ReactElement {
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <h1 className="text-2xl font-semibold">My Anime Tracker</h1>
-    </main>
+    <>
+      <NavBar />
+      <main className="mx-auto max-w-7xl">
+        <PlaceholderGrid />
+      </main>
+    </>
   )
 }
