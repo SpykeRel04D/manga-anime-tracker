@@ -9,9 +9,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Authentication
 
-- [ ] **AUTH-01**: User can sign up with email and password
-- [ ] **AUTH-02**: User can log in with email and password
-- [ ] **AUTH-03**: User session persists across browser refresh
+- [x] **AUTH-01**: User can sign up with email and password
+- [x] **AUTH-02**: User can log in with email and password
+- [x] **AUTH-03**: User session persists across browser refresh
 
 ### Search
 
@@ -99,9 +99,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DSGN-02 | Phase 1: Foundation and Design System | Complete |
 | DSGN-03 | Phase 1: Foundation and Design System | Pending |
 | DSGN-04 | Phase 1: Foundation and Design System | Pending |
-| AUTH-01 | Phase 2: Authentication | Pending |
-| AUTH-02 | Phase 2: Authentication | Pending |
-| AUTH-03 | Phase 2: Authentication | Pending |
+| AUTH-01 | Phase 2: Authentication | Complete |
+| AUTH-02 | Phase 2: Authentication | Complete |
+| AUTH-03 | Phase 2: Authentication | Complete |
 | SRCH-01 | Phase 3: Search and API Integration | Pending |
 | SRCH-02 | Phase 3: Search and API Integration | Pending |
 | SRCH-03 | Phase 3: Search and API Integration | Pending |

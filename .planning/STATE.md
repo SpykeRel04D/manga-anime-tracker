@@ -2,19 +2,19 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 1
-current_phase_name: Foundation and Design System
-current_plan: 3
+current_phase: 2
+current_phase_name: Authentication
+current_plan: 1
 status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-08T19:17:55.039Z"
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-08T20:44:51.631Z"
 last_activity: 2026-03-08
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
-  percent: 20
+  total_plans: 5
+  completed_plans: 4
+  percent: 30
 ---
 
 # Project State
@@ -24,19 +24,19 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-08)
 
 **Core value:** Quickly see where I left off on any anime or manga, and never lose track of my watching/reading progress.
-**Current focus:** Phase 1: Foundation and Design System
+**Current focus:** Phase 2: Authentication
 
 ## Current Position
 
-Current Phase: 1
-Current Phase Name: Foundation and Design System
+Current Phase: 2
+Current Phase Name: Authentication
 Total Phases: 5
-Current Plan: 3
-Total Plans in Phase: 3
-Status: Ready to execute
+Current Plan: 1
+Total Plans in Phase: 2
+Status: Executing
 Last Activity: 2026-03-08
 
-Progress: [██░░░░░░░░] 20%
+Progress: [███░░░░░░░] 30%
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 01 P01 | 6min | 2 tasks | 26 files |
 | Phase 01 P02 | 3min | 2 tasks | 19 files |
 | Phase 01 P03 | 5min | 3 tasks | 17 files |
+| Phase 02 P01 | 4min | 2 tasks | 17 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,11 @@ Recent decisions affecting current work:
 - [Phase 01]: Drizzle config loads .env.local before .env for local dev compatibility (dotenv reads .env by default, but Next.js convention uses .env.local)
 - [Phase 01]: Dark-only app: ThemeProvider forces dark mode with enableSystem=false, no light theme toggle
 - [Phase 01]: oklch color format for all theme variables (Tailwind v4 native support)
+- [Phase 02]: Better Auth v1.5.4 with Drizzle adapter for auth backend (native Next.js 16 support confirmed)
+- [Phase 02]: Database sessions with 30-day expiry and 1-day sliding window (not JWT)
+- [Phase 02]: Registration lock via databaseHooks.user.create.before with ALLOW_REGISTRATION env escape hatch
+- [Phase 02]: proxy.ts (Next.js 16 convention) for cookie-based route protection with defense-in-depth
+- [Phase 02]: text type for Better Auth table PKs since Better Auth generates string IDs internally
 
 ### Pending Todos
 
@@ -82,11 +88,11 @@ None yet.
 ### Blockers/Concerns
 
 - [Research]: AniList API currently degraded to 30 req/min -- design for this as baseline (affects Phase 3)
-- [Research]: Better Auth + Next.js 16 compatibility not explicitly verified -- validate during Phase 2
+- [RESOLVED]: Better Auth v1.5.4 + Next.js 16.1.6 compatibility verified -- build succeeds, proxy.ts works
 - [Research]: Neon cold start + Vercel cold start combined latency should be measured during Phase 1
 
 ## Session Continuity
 
-Last session: 2026-03-08T19:17:55.037Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-authentication/02-CONTEXT.md
+Last session: 2026-03-08T20:42:50Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: .planning/phases/02-authentication/02-01-SUMMARY.md
