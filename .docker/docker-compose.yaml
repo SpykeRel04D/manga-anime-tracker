@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17.6-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: manga_tracker
+      POSTGRES_PASSWORD: manga_tracker
+      POSTGRES_DB: manga_tracker
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U manga_tracker']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
