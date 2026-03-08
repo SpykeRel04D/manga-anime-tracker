@@ -2,19 +2,19 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 2
-current_phase_name: Authentication
-current_plan: 2
+current_phase: 3
+current_phase_name: Search and API Integration
+current_plan: 1
 status: executing
-stopped_at: Phase 3 context gathered
-last_updated: "2026-03-08T21:33:35.126Z"
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-03-08T22:10:20.992Z"
 last_activity: 2026-03-08
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
-  percent: 40
+  total_plans: 7
+  completed_plans: 6
+  percent: 86
 ---
 
 # Project State
@@ -24,19 +24,19 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-08)
 
 **Core value:** Quickly see where I left off on any anime or manga, and never lose track of my watching/reading progress.
-**Current focus:** Phase 2: Authentication
+**Current focus:** Phase 3: Search and API Integration
 
 ## Current Position
 
-Current Phase: 2
-Current Phase Name: Authentication
+Current Phase: 3
+Current Phase Name: Search and API Integration
 Total Phases: 5
-Current Plan: 2
+Current Plan: 1
 Total Plans in Phase: 2
 Status: Executing
 Last Activity: 2026-03-08
 
-Progress: [████░░░░░░] 40%
+Progress: [████████░░] 86%
 
 ## Performance Metrics
 
@@ -61,6 +61,7 @@ Progress: [████░░░░░░] 40%
 | Phase 01 P03 | 5min | 3 tasks | 17 files |
 | Phase 02 P01 | 4min | 2 tasks | 17 files |
 | Phase 02 P02 | 8min | 3 tasks | 9 files |
+| Phase 03 P01 | 3min | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,10 @@ Recent decisions affecting current work:
 - [Phase 02]: Extracted SignupForm into separate client component for clean server/client boundary
 - [Phase 02]: Better Auth generateId configured for UUID generation to match users table schema
 - [Phase 02]: Singular modelName mapping for Better Auth Drizzle adapter (account, session, verification)
+- [Phase 03]: Native fetch for AniList GraphQL (no Apollo/urql -- single POST query)
+- [Phase 03]: Token bucket rate limiter at 25 req/min (safety margin under AniList 30 req/min degraded limit)
+- [Phase 03]: 5-minute server-side cache via Next.js revalidate: 300
+- [Phase 03]: plan_to_watch default status for both anime and manga (schema enum has no plan_to_read)
 
 ### Pending Todos
 
@@ -97,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-08T21:33:35.123Z
-Stopped at: Phase 3 context gathered
-Resume file: .planning/phases/03-search-and-api-integration/03-CONTEXT.md
+Last session: 2026-03-08T22:09:37Z
+Stopped at: Completed 03-01-PLAN.md
+Resume file: .planning/phases/03-search-and-api-integration/03-01-SUMMARY.md
