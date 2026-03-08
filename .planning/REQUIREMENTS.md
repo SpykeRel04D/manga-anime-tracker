@@ -37,8 +37,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Design
 
-- [ ] **DSGN-01**: App uses a warm cozy dark theme by default (warm dark tones, soft borders, amber accents)
-- [ ] **DSGN-02**: App layout is responsive and mobile-first (2 columns mobile, 3-4 tablet, 5-6 desktop)
+- [x] **DSGN-01**: App uses a warm cozy dark theme by default (warm dark tones, soft borders, amber accents)
+- [x] **DSGN-02**: App layout is responsive and mobile-first (2 columns mobile, 3-4 tablet, 5-6 desktop)
 - [ ] **DSGN-03**: App supports English, Spanish, and Catalan with English as default
 - [ ] **DSGN-04**: All UI text uses translation keys (no hardcoded strings)
 
@@ -95,8 +95,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFR-02 | Phase 1: Foundation and Design System | Complete |
 | INFR-03 | Phase 1: Foundation and Design System | Complete |
 | INFR-04 | Phase 1: Foundation and Design System | Complete |
-| DSGN-01 | Phase 1: Foundation and Design System | Pending |
-| DSGN-02 | Phase 1: Foundation and Design System | Pending |
+| DSGN-01 | Phase 1: Foundation and Design System | Complete |
+| DSGN-02 | Phase 1: Foundation and Design System | Complete |
 | DSGN-03 | Phase 1: Foundation and Design System | Pending |
 | DSGN-04 | Phase 1: Foundation and Design System | Pending |
 | AUTH-01 | Phase 2: Authentication | Pending |
