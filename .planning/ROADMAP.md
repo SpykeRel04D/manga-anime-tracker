@@ -64,8 +64,8 @@ Plans:
 **Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 03-01-PLAN.md -- Domain entities, ports, AniList GraphQL adapter with rate limiting, search and add-to-list use cases, comprehensive tests
-- [ ] 03-02-PLAN.md -- Search page UI: debounced input with URL sync, horizontal result cards, type badges, add-to-list action with toast, visual verification
+- [x] 03-01-PLAN.md -- Domain entities, ports, AniList GraphQL adapter with rate limiting, search and add-to-list use cases, comprehensive tests
+- [x] 03-02-PLAN.md -- Search page UI: debounced input with URL sync, horizontal result cards, type badges, add-to-list action with toast, visual verification
 
 ### Phase 4: Core Tracking
 **Goal**: Users can build and manage their personal anime/manga tracking list -- adding series, setting statuses, updating progress, rating, taking notes, and removing entries
@@ -77,11 +77,11 @@ Plans:
   3. User can update current episode (anime) or chapter (manga) using increment, decrement, or direct number input
   4. User can rate any tracked entry on a 1-10 scale and edit or remove the rating
   5. User can add, edit, and view personal notes on any tracked entry
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
+- [ ] 04-01-PLAN.md -- Schema migration (lastSyncedAt), all tracking use cases (get, update-status/progress/rating/notes, remove, refresh-metadata), AniList adapter extension, comprehensive TDD tests
+- [ ] 04-02-PLAN.md -- Edit page UI at /tracking/[id] with auto-save (status dropdown, progress stepper, star rating, notes textarea), remove confirmation, metadata refresh, search card integration, visual verification
 
 ### Phase 5: List UI and Browsing
 **Goal**: Users can visually browse, filter, sort, and inspect their tracked collection -- the cover image grid that is the primary daily interface
