@@ -44,9 +44,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFR-01**: App deploys to Vercel free tier
+- [x] **INFR-01**: App deploys to Vercel free tier
 - [ ] **INFR-02**: App uses Neon PostgreSQL free tier for user data
-- [ ] **INFR-03**: Local development uses Docker with Makefile commands (make up, make halt, make destroy)
+- [x] **INFR-03**: Local development uses Docker with Makefile commands (make up, make halt, make destroy)
 - [ ] **INFR-04**: Codebase follows Hexagonal DDD architecture (Domain, Application, Infrastructure, UI layers)
 
 ## v2 Requirements
@@ -91,9 +91,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFR-01 | Phase 1: Foundation and Design System | Pending |
+| INFR-01 | Phase 1: Foundation and Design System | Complete |
 | INFR-02 | Phase 1: Foundation and Design System | Pending |
-| INFR-03 | Phase 1: Foundation and Design System | Pending |
+| INFR-03 | Phase 1: Foundation and Design System | Complete |
 | INFR-04 | Phase 1: Foundation and Design System | Pending |
 | DSGN-01 | Phase 1: Foundation and Design System | Pending |
 | DSGN-02 | Phase 1: Foundation and Design System | Pending |
