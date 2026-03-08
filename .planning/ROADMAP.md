@@ -61,10 +61,11 @@ Plans:
   2. User can type a manga title into a search field and see matching results appear after a brief debounce
   3. Each search result displays the cover art, title, type (anime/manga), airing/publishing status, and episode/chapter count
   4. Search works reliably without hitting AniList rate limits during normal use (multiple searches in sequence do not cause failures)
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md -- Domain entities, ports, AniList GraphQL adapter with rate limiting, search and add-to-list use cases, comprehensive tests
+- [ ] 03-02-PLAN.md -- Search page UI: debounced input with URL sync, horizontal result cards, type badges, add-to-list action with toast, visual verification
 
 ### Phase 4: Core Tracking
 **Goal**: Users can build and manage their personal anime/manga tracking list -- adding series, setting statuses, updating progress, rating, taking notes, and removing entries
@@ -106,6 +107,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Foundation and Design System | 3/3 | Complete   | 2026-03-08 |
 | 2. Authentication | 2/2 | Complete | 2026-03-08 |
-| 3. Search and API Integration | 0/1 | Not started | - |
+| 3. Search and API Integration | 0/2 | Not started | - |
 | 4. Core Tracking | 0/2 | Not started | - |
 | 5. List UI and Browsing | 0/2 | Not started | - |
