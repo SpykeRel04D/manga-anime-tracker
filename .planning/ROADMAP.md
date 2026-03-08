@@ -13,7 +13,7 @@ This roadmap delivers a personal anime/manga tracking application in five phases
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation and Design System** - Project scaffolding, Docker DX, database, Hexagonal DDD structure, warm dark theme, responsive layout, and placeholder UI (completed 2026-03-08)
-- [ ] **Phase 2: Authentication** - Email/password signup, login, and persistent sessions
+- [x] **Phase 2: Authentication** - Email/password signup, login, and persistent sessions (completed 2026-03-08)
 - [ ] **Phase 3: Search and API Integration** - AniList GraphQL adapter with rate limiting, anime/manga search with debounced input
 - [ ] **Phase 4: Core Tracking** - Add/remove series, status management, episode/chapter progress, ratings, and notes
 - [ ] **Phase 5: List UI and Browsing** - Cover image grid with status badges, filtering, sorting, and detail pages
@@ -46,11 +46,11 @@ Plans:
   2. User can log in with email and password from a login page and is redirected to the main app
   3. User session persists across browser refresh and tab close/reopen without requiring re-login
   4. Unauthenticated users are redirected to the login page when trying to access protected routes
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 02-01-PLAN.md -- Better Auth setup, database schema changes (users table + auth tables), server/client config, API route handler, proxy.ts route protection, registration lock tests
-- [ ] 02-02-PLAN.md -- Auth UI: login page, signup page, route group restructuring, auth-aware nav bar with logout dropdown, visual verification
+- [x] 02-01-PLAN.md -- Better Auth setup, database schema changes (users table + auth tables), server/client config, API route handler, proxy.ts route protection, registration lock tests
+- [x] 02-02-PLAN.md -- Auth UI: login page, signup page, route group restructuring, auth-aware nav bar with logout dropdown, visual verification
 
 ### Phase 3: Search and API Integration
 **Goal**: Users can search for any anime or manga by title and see rich search results -- establishing the AniList API adapter with rate limiting and caching that all future features depend on
@@ -105,7 +105,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation and Design System | 3/3 | Complete   | 2026-03-08 |
-| 2. Authentication | 0/2 | Not started | - |
+| 2. Authentication | 2/2 | Complete | 2026-03-08 |
 | 3. Search and API Integration | 0/1 | Not started | - |
 | 4. Core Tracking | 0/2 | Not started | - |
 | 5. List UI and Browsing | 0/2 | Not started | - |
