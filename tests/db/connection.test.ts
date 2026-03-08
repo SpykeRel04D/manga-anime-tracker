@@ -1,7 +1,15 @@
 import { getTableColumns } from 'drizzle-orm'
 import { describe, expect, it } from 'vitest'
 
-import { mediaTypeEnum, trackingEntries, trackingStatusEnum, users } from '@/db/schema'
+import {
+  accounts,
+  mediaTypeEnum,
+  sessions,
+  trackingEntries,
+  trackingStatusEnum,
+  users,
+  verifications,
+} from '@/db/schema'
 
 describe('Drizzle schema exports', () => {
   it('exports users table', () => {
@@ -19,6 +27,18 @@ describe('Drizzle schema exports', () => {
   it('exports mediaTypeEnum', () => {
     expect(mediaTypeEnum).toBeDefined()
   })
+
+  it('exports sessions table', () => {
+    expect(sessions).toBeDefined()
+  })
+
+  it('exports accounts table', () => {
+    expect(accounts).toBeDefined()
+  })
+
+  it('exports verifications table', () => {
+    expect(verifications).toBeDefined()
+  })
 })
 
 describe('users table schema shape', () => {
@@ -32,8 +52,16 @@ describe('users table schema shape', () => {
     expect(columns.email).toBeDefined()
   })
 
-  it('has passwordHash column', () => {
-    expect(columns.passwordHash).toBeDefined()
+  it('does NOT have passwordHash column', () => {
+    expect(columns).not.toHaveProperty('passwordHash')
+  })
+
+  it('has emailVerified column', () => {
+    expect(columns.emailVerified).toBeDefined()
+  })
+
+  it('has image column', () => {
+    expect(columns.image).toBeDefined()
   })
 
   it('has name column', () => {
