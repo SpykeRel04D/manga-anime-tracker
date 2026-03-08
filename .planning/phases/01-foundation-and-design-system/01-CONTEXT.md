@@ -16,7 +16,7 @@ Project scaffolding (Next.js 16 App Router + pnpm), Docker DX with Makefile, Pos
 ### Framework and Tooling
 - Next.js 16 App Router with pnpm
 - TypeScript strict mode
-- ESLint + Prettier config ported from kern-ecommerce project:
+- ESLint + Prettier config (established conventions):
   - ESLint: `next/core-web-vitals` + `next/typescript`, consistent-type-imports error, no-console error (allow warn/error), explicit-function-return-type for TS files, no-unused-vars with `_` ignore pattern
   - Prettier: single quotes, no semicolons, printWidth 90, `@trivago/prettier-plugin-sort-imports` + `prettier-plugin-tailwindcss`, arrowParens avoid
   - PostCSS: `@tailwindcss/postcss`
@@ -56,7 +56,7 @@ Project scaffolding (Next.js 16 App Router + pnpm), Docker DX with Makefile, Pos
 - None — greenfield project, codebase is empty
 
 ### Established Patterns
-- Linting/formatting patterns from kern-ecommerce (same developer, same conventions)
+- Linting/formatting patterns from established project conventions
 
 ### Integration Points
 - Vercel for production deployment
@@ -68,7 +68,7 @@ Project scaffolding (Next.js 16 App Router + pnpm), Docker DX with Makefile, Pos
 <specifics>
 ## Specific Ideas
 
-- ESLint + Prettier + PostCSS config should match the kern-ecommerce project at `/Users/o105/Sites/dockerized/kern-ecommerce` (adapted for this project — remove payload/sqlite-specific overrides)
+- ESLint + Prettier + PostCSS config adapted from established project conventions (payload/sqlite-specific overrides removed)
 - Theme inspired by warm candlelight — amber accents on dark warm backgrounds
 - Cover art should be the visual star — UI is a clean frame around it
 

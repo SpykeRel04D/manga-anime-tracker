@@ -10,7 +10,7 @@ This phase scaffolds a greenfield Next.js 16 project with pnpm, sets up Docker-b
 
 Next.js 16 (current stable: 16.1.6) introduces several breaking changes from v15: Turbopack is now the default bundler, `middleware.ts` is deprecated in favor of `proxy.ts`, all request APIs (`params`, `searchParams`, `cookies`, `headers`) must be awaited, and `next lint` is removed (use ESLint CLI directly). The project is greenfield so no migration is needed, but these patterns must be followed from the start.
 
-**Primary recommendation:** Use `create-next-app` for initial scaffolding, immediately configure the warm dark theme as the only theme (no light mode), set up Docker PostgreSQL with the same pattern as kern-ecommerce, and organize business logic under `src/modules/{context}/{domain,application,infrastructure}` with UI under `src/app/`.
+**Primary recommendation:** Use `create-next-app` for initial scaffolding, immediately configure the warm dark theme as the only theme (no light mode), set up Docker PostgreSQL with Makefile DX, and organize business logic under `src/modules/{context}/{domain,application,infrastructure}` with UI under `src/app/`.
 
 <user_constraints>
 ## User Constraints (from CONTEXT.md)
@@ -18,7 +18,7 @@ Next.js 16 (current stable: 16.1.6) introduces several breaking changes from v15
 ### Locked Decisions
 - Next.js 16 App Router with pnpm
 - TypeScript strict mode
-- ESLint + Prettier config ported from kern-ecommerce project:
+- ESLint + Prettier config (established conventions):
   - ESLint: `next/core-web-vitals` + `next/typescript`, consistent-type-imports error, no-console error (allow warn/error), explicit-function-return-type for TS files, no-unused-vars with `_` ignore pattern
   - Prettier: single quotes, no semicolons, printWidth 90, `@trivago/prettier-plugin-sort-imports` + `prettier-plugin-tailwindcss`, arrowParens avoid
   - PostCSS: `@tailwindcss/postcss`
@@ -34,7 +34,7 @@ Next.js 16 (current stable: 16.1.6) introduces several breaking changes from v15
 - Responsive layout: 2 columns mobile, 3-4 tablet, 5-6 desktop
 - Top nav bar with "My Anime Tracker" and placeholder links (My List, Search)
 - Placeholder user avatar in nav
-- ESLint + Prettier + PostCSS config from kern-ecommerce at `/Users/o105/Sites/dockerized/kern-ecommerce` (adapted -- remove payload/sqlite-specific overrides)
+- ESLint + Prettier + PostCSS config adapted from established project conventions (payload/sqlite-specific overrides removed)
 
 ### Claude's Discretion
 - Exact skeleton shimmer animation style
@@ -56,7 +56,7 @@ Next.js 16 (current stable: 16.1.6) introduces several breaking changes from v15
 |----|-------------|-----------------|
 | INFR-01 | App deploys to Vercel free tier | Next.js 16 + Vercel: standard deployment, no special config needed. Turbopack builds by default. |
 | INFR-02 | App uses Neon PostgreSQL free tier for user data | Drizzle ORM `drizzle-orm/neon-http` driver with `@neondatabase/serverless`. Dual-env config pattern researched. |
-| INFR-03 | Local development uses Docker with Makefile commands (make up, make halt, make destroy) | Docker Compose pattern from kern-ecommerce: PostgreSQL 17-alpine, named volumes, Makefile includes. |
+| INFR-03 | Local development uses Docker with Makefile commands (make up, make halt, make destroy) | Docker Compose pattern: PostgreSQL 17-alpine, named volumes, Makefile includes. |
 | INFR-04 | Codebase follows Hexagonal DDD architecture (Domain, Application, Infrastructure, UI layers) | Folder structure: `src/modules/{context}/{domain,application,infrastructure}` + `src/app/` for UI. |
 | DSGN-01 | App uses a warm cozy dark theme (warm dark tones, soft borders, amber accents) | shadcn/ui CSS variables with oklch colors, custom warm palette, next-themes with forced dark mode. |
 | DSGN-02 | App layout is responsive and mobile-first (2 columns mobile, 3-4 tablet, 5-6 desktop) | Tailwind CSS responsive grid: `grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6`. |
@@ -238,7 +238,7 @@ export default function RootLayout({
 }
 ```
 
-### Pattern 4: Docker Compose + Makefile (kern-ecommerce Pattern)
+### Pattern 4: Docker Compose + Makefile (Include Pattern)
 **What:** Minimal docker-compose.yaml for PostgreSQL only (Next.js runs on host via `pnpm dev`). Makefile delegates to `.docker/Makefile` includes.
 **When to use:** Local development setup.
 **Example structure:**
@@ -314,7 +314,7 @@ Makefile                      # Root Makefile includes .docker/Makefile
 
 ### Pitfall 7: ESLint Flat Config Confusion
 **What goes wrong:** Mixing `.eslintrc` legacy format with flat config format.
-**Why it happens:** Next.js 16 defaults to flat config. The kern-ecommerce pattern uses `FlatCompat` wrapper.
+**Why it happens:** Next.js 16 defaults to flat config. Legacy configs use `FlatCompat` wrapper.
 **How to avoid:** Use `eslint.config.mjs` with `FlatCompat` for `next/core-web-vitals` extends (they still use legacy format internally).
 **Warning signs:** ESLint config parsing errors, rules not being applied.
 
@@ -414,10 +414,10 @@ Makefile                      # Root Makefile includes .docker/Makefile
 }
 ```
 
-### ESLint Flat Config (Adapted from kern-ecommerce)
+### ESLint Flat Config (Project Conventions)
 ```javascript
 // eslint.config.mjs
-// Source: kern-ecommerce eslint.config.mjs (payload/sqlite overrides removed)
+// Adapted from established project conventions (payload/sqlite overrides removed)
 import { FlatCompat } from '@eslint/eslintrc'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -595,7 +595,7 @@ export function PlaceholderGrid(): React.ReactElement {
 ### Test Framework
 | Property | Value |
 |----------|-------|
-| Framework | Vitest (matches kern-ecommerce pattern) |
+| Framework | Vitest |
 | Config file | `vitest.config.mts` -- Wave 0 |
 | Quick run command | `pnpm vitest run --reporter=verbose` |
 | Full suite command | `pnpm vitest run` |
@@ -634,7 +634,7 @@ export function PlaceholderGrid(): React.ReactElement {
 - [Drizzle ORM + Neon tutorial](https://orm.drizzle.team/docs/tutorials/drizzle-nextjs-neon) -- Schema, config, migration commands
 - [Drizzle ORM + PostgreSQL setup](https://orm.drizzle.team/docs/get-started/postgresql-new) -- node-postgres driver setup
 - [Neon local + serverless guide](https://neon.com/guides/drizzle-local-vercel) -- Dual-environment configuration
-- kern-ecommerce project at `/Users/o105/Sites/dockerized/kern-ecommerce` -- ESLint, Prettier, PostCSS, Docker, Makefile patterns (read directly)
+- Established project conventions -- ESLint, Prettier, PostCSS, Docker, Makefile patterns
 
 ### Secondary (MEDIUM confidence)
 - [shadcn/ui dark mode with next-themes](https://ui.shadcn.com/docs/dark-mode/next) -- ThemeProvider setup pattern
@@ -648,7 +648,7 @@ export function PlaceholderGrid(): React.ReactElement {
 
 **Confidence breakdown:**
 - Standard stack: HIGH -- All libraries verified against official docs and current releases
-- Architecture: HIGH -- Hexagonal DDD pattern well-documented, kern-ecommerce Docker pattern read directly
+- Architecture: HIGH -- Hexagonal DDD pattern well-documented, Docker DX pattern established
 - Pitfalls: HIGH -- All pitfalls sourced from Next.js 16 official breaking changes documentation
 - Theme colors: MEDIUM -- oklch values are approximations of the desired warm amber palette, need visual tuning
 

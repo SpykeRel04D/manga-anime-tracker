@@ -8,7 +8,7 @@ tags: [next.js, pnpm, typescript, tailwind, eslint, prettier, vitest, docker, po
 requires: []
 provides:
   - "Buildable Next.js 16 project with Turbopack"
-  - "ESLint flat config with kern-ecommerce rules"
+  - "ESLint flat config with project conventions"
   - "Prettier with import sorting and Tailwind class sorting"
   - "Vitest test framework configured with path aliases"
   - "Docker PostgreSQL via Makefile commands (make up/halt/destroy)"
@@ -57,7 +57,7 @@ completed: 2026-03-08
 
 # Phase 1 Plan 1: Project Scaffold Summary
 
-**Next.js 16.1.6 project with pnpm, ESLint/Prettier from kern-ecommerce, Vitest, and Docker PostgreSQL via Makefile DX**
+**Next.js 16.1.6 project with pnpm, ESLint/Prettier, Vitest, and Docker PostgreSQL via Makefile DX**
 
 ## Performance
 
@@ -84,7 +84,7 @@ Each task was committed atomically:
 
 ## Files Created/Modified
 - `package.json` - Project manifest with all scripts and dependencies
-- `eslint.config.mjs` - ESLint flat config with kern-ecommerce rules
+- `eslint.config.mjs` - ESLint flat config with project conventions
 - `.prettierrc.json` - Prettier with import sorting and Tailwind class sorting
 - `postcss.config.mjs` - PostCSS with @tailwindcss/postcss plugin
 - `vitest.config.mts` - Vitest config with path alias and React plugin
