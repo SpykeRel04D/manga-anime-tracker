@@ -91,36 +91,36 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | — | Pending |
-| AUTH-02 | — | Pending |
-| AUTH-03 | — | Pending |
-| SRCH-01 | — | Pending |
-| SRCH-02 | — | Pending |
-| SRCH-03 | — | Pending |
-| TRCK-01 | — | Pending |
-| TRCK-02 | — | Pending |
-| TRCK-03 | — | Pending |
-| TRCK-04 | — | Pending |
-| TRCK-05 | — | Pending |
-| TRCK-06 | — | Pending |
-| LIST-01 | — | Pending |
-| LIST-02 | — | Pending |
-| LIST-03 | — | Pending |
-| LIST-04 | — | Pending |
-| DSGN-01 | — | Pending |
-| DSGN-02 | — | Pending |
-| DSGN-03 | — | Pending |
-| DSGN-04 | — | Pending |
-| INFR-01 | — | Pending |
-| INFR-02 | — | Pending |
-| INFR-03 | — | Pending |
-| INFR-04 | — | Pending |
+| INFR-01 | Phase 1: Foundation and Design System | Pending |
+| INFR-02 | Phase 1: Foundation and Design System | Pending |
+| INFR-03 | Phase 1: Foundation and Design System | Pending |
+| INFR-04 | Phase 1: Foundation and Design System | Pending |
+| DSGN-01 | Phase 1: Foundation and Design System | Pending |
+| DSGN-02 | Phase 1: Foundation and Design System | Pending |
+| DSGN-03 | Phase 1: Foundation and Design System | Pending |
+| DSGN-04 | Phase 1: Foundation and Design System | Pending |
+| AUTH-01 | Phase 2: Authentication | Pending |
+| AUTH-02 | Phase 2: Authentication | Pending |
+| AUTH-03 | Phase 2: Authentication | Pending |
+| SRCH-01 | Phase 3: Search and API Integration | Pending |
+| SRCH-02 | Phase 3: Search and API Integration | Pending |
+| SRCH-03 | Phase 3: Search and API Integration | Pending |
+| TRCK-01 | Phase 4: Core Tracking | Pending |
+| TRCK-02 | Phase 4: Core Tracking | Pending |
+| TRCK-03 | Phase 4: Core Tracking | Pending |
+| TRCK-04 | Phase 4: Core Tracking | Pending |
+| TRCK-05 | Phase 4: Core Tracking | Pending |
+| TRCK-06 | Phase 4: Core Tracking | Pending |
+| LIST-01 | Phase 5: List UI and Browsing | Pending |
+| LIST-02 | Phase 5: List UI and Browsing | Pending |
+| LIST-03 | Phase 5: List UI and Browsing | Pending |
+| LIST-04 | Phase 5: List UI and Browsing | Pending |
 
 **Coverage:**
 - v1 requirements: 24 total
-- Mapped to phases: 0
-- Unmapped: 24 ⚠️
+- Mapped to phases: 24
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-08*
-*Last updated: 2026-03-08 after initial definition*
+*Last updated: 2026-03-08 after roadmap creation*

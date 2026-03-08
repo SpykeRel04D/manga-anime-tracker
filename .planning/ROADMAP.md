@@ -1,0 +1,109 @@
+# Roadmap: My Anime Tracker
+
+## Overview
+
+This roadmap delivers a personal anime/manga tracking application in five phases. The build order follows dependency chains: infrastructure and design system first (so every subsequent feature uses the right architecture, theme, and i18n from the start), then authentication (user identity gates all data), then AniList API integration (content discovery before tracking), then core tracking (the reason the app exists), and finally the list UI (the primary daily interface). Each phase delivers a coherent, verifiable capability.
+
+## Phases
+
+**Phase Numbering:**
+- Integer phases (1, 2, 3): Planned milestone work
+- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+
+Decimal phases appear between their surrounding integers in numeric order.
+
+- [ ] **Phase 1: Foundation and Design System** - Project scaffolding, Docker DX, database, Hexagonal DDD structure, warm dark theme, responsive layout, and i18n scaffolding
+- [ ] **Phase 2: Authentication** - Email/password signup, login, and persistent sessions
+- [ ] **Phase 3: Search and API Integration** - AniList GraphQL adapter with rate limiting, anime/manga search with debounced input
+- [ ] **Phase 4: Core Tracking** - Add/remove series, status management, episode/chapter progress, ratings, and notes
+- [ ] **Phase 5: List UI and Browsing** - Cover image grid with status badges, filtering, sorting, and detail pages
+
+## Phase Details
+
+### Phase 1: Foundation and Design System
+**Goal**: A working development environment with the Hexagonal DDD project structure, database, warm dark theme, responsive layout, and trilingual i18n -- so every subsequent phase builds on correct architecture and design foundations
+**Depends on**: Nothing (first phase)
+**Requirements**: INFR-01, INFR-02, INFR-03, INFR-04, DSGN-01, DSGN-02, DSGN-03, DSGN-04
+**Success Criteria** (what must be TRUE):
+  1. Running `make up` starts the local development environment (Docker PostgreSQL + Next.js dev server) and the app loads in the browser
+  2. The app displays a placeholder page using the warm cozy dark theme (warm dark tones, soft borders, amber accents) with responsive layout that adapts from mobile to desktop
+  3. The app renders in English by default, and switching to Spanish or Catalan shows translated placeholder text (no hardcoded strings)
+  4. The codebase follows the Hexagonal DDD folder structure (domain, application, infrastructure, UI layers) with at least the auth and tracking bounded contexts scaffolded
+  5. The database is accessible via Drizzle ORM with initial schema migrations applied (Neon for production, Docker PostgreSQL for local)
+**Plans**: TBD
+
+Plans:
+- [ ] 01-01: TBD
+- [ ] 01-02: TBD
+
+### Phase 2: Authentication
+**Goal**: Users can securely create an account and log in, with sessions that survive browser refresh -- gating all future tracking features behind user identity
+**Depends on**: Phase 1
+**Requirements**: AUTH-01, AUTH-02, AUTH-03
+**Success Criteria** (what must be TRUE):
+  1. User can create a new account with email and password from a signup page
+  2. User can log in with email and password from a login page and is redirected to the main app
+  3. User session persists across browser refresh and tab close/reopen without requiring re-login
+  4. Unauthenticated users are redirected to the login page when trying to access protected routes
+**Plans**: TBD
+
+Plans:
+- [ ] 02-01: TBD
+
+### Phase 3: Search and API Integration
+**Goal**: Users can search for any anime or manga by title and see rich search results -- establishing the AniList API adapter with rate limiting and caching that all future features depend on
+**Depends on**: Phase 2
+**Requirements**: SRCH-01, SRCH-02, SRCH-03
+**Success Criteria** (what must be TRUE):
+  1. User can type an anime title into a search field and see matching results appear after a brief debounce (no results flash or excessive API calls)
+  2. User can type a manga title into a search field and see matching results appear after a brief debounce
+  3. Each search result displays the cover art, title, type (anime/manga), airing/publishing status, and episode/chapter count
+  4. Search works reliably without hitting AniList rate limits during normal use (multiple searches in sequence do not cause failures)
+**Plans**: TBD
+
+Plans:
+- [ ] 03-01: TBD
+
+### Phase 4: Core Tracking
+**Goal**: Users can build and manage their personal anime/manga tracking list -- adding series, setting statuses, updating progress, rating, taking notes, and removing entries
+**Depends on**: Phase 3
+**Requirements**: TRCK-01, TRCK-02, TRCK-03, TRCK-04, TRCK-05, TRCK-06
+**Success Criteria** (what must be TRUE):
+  1. User can add an anime or manga to their tracking list directly from search results
+  2. User can set and change the status of any tracked entry (Watching, Completed, On Hold, Dropped, Plan to Watch/Read)
+  3. User can update current episode (anime) or chapter (manga) using increment, decrement, or direct number input
+  4. User can rate any tracked entry on a 1-10 scale and edit or remove the rating
+  5. User can add, edit, and view personal notes on any tracked entry
+**Plans**: TBD
+
+Plans:
+- [ ] 04-01: TBD
+- [ ] 04-02: TBD
+
+### Phase 5: List UI and Browsing
+**Goal**: Users can visually browse, filter, sort, and inspect their tracked collection -- the cover image grid that is the primary daily interface
+**Depends on**: Phase 4
+**Requirements**: LIST-01, LIST-02, LIST-03, LIST-04
+**Success Criteria** (what must be TRUE):
+  1. User sees their tracked series as a visual grid of cover images with status badges and progress indicators, using a responsive layout (2 columns mobile, 3-4 tablet, 5-6 desktop)
+  2. User can filter their list by status (Watching, Completed, On Hold, Dropped, Plan to Watch/Read) and by type (anime/manga)
+  3. User can sort their list by rating, title, or date added
+  4. User can click a tracked entry to view a detail page showing full metadata (synopsis, genres, studios/authors, airing status, related series)
+**Plans**: TBD
+
+Plans:
+- [ ] 05-01: TBD
+- [ ] 05-02: TBD
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
+
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 1. Foundation and Design System | 0/2 | Not started | - |
+| 2. Authentication | 0/1 | Not started | - |
+| 3. Search and API Integration | 0/1 | Not started | - |
+| 4. Core Tracking | 0/2 | Not started | - |
+| 5. List UI and Browsing | 0/2 | Not started | - |
