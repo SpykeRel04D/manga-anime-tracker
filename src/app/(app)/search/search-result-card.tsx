@@ -2,6 +2,7 @@
 
 import { Loader2, Plus } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { ReactElement } from 'react'
 import { useTransition } from 'react'
@@ -23,12 +24,12 @@ const STATUS_LABELS: Record<string, string> = {
 
 interface SearchResultCardProps {
   result: MediaSearchResult
-  isTracked: boolean
+  trackedEntryId: string | null
 }
 
 export function SearchResultCard({
   result,
-  isTracked,
+  trackedEntryId,
 }: SearchResultCardProps): ReactElement {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
@@ -46,7 +47,12 @@ export function SearchResultCard({
       })
 
       if (response.success) {
-        toast.success(`Added "${result.title}" to your list`)
+        toast.success(`Added "${result.title}" to your list`, {
+          action: {
+            label: 'Manage',
+            onClick: () => router.push(`/tracking/${response.entryId}`),
+          },
+        })
         router.refresh()
       } else if (response.error === 'already_tracked') {
         toast.info(`"${result.title}" is already in your list`)
@@ -112,8 +118,12 @@ export function SearchResultCard({
         {countLabel && <p className="text-muted-foreground text-xs">{countLabel}</p>}
 
         <div className="mt-auto pt-1">
-          {isTracked ? (
-            <Badge variant="secondary">Plan to Watch</Badge>
+          {trackedEntryId !== null ? (
+            <Link href={`/tracking/${trackedEntryId}`}>
+              <Badge variant="secondary" className="cursor-pointer hover:bg-secondary/80">
+                Tracked
+              </Badge>
+            </Link>
           ) : (
             <Button
               variant="secondary"

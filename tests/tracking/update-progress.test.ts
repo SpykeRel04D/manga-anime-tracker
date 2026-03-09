@@ -36,11 +36,8 @@ function mockSelectEntry(entry: Record<string, unknown> | null) {
   mockDb.select.mockReturnValue({ from: mockFrom } as never)
 }
 
-function mockUpdate(rowsAffected: number) {
-  const mockReturning = vi.fn().mockResolvedValue(
-    rowsAffected > 0 ? [{ id: 'entry-123' }] : [],
-  )
-  const mockWhere = vi.fn().mockReturnValue({ returning: mockReturning })
+function mockUpdate() {
+  const mockWhere = vi.fn().mockResolvedValue([])
   const mockSet = vi.fn().mockReturnValue({ where: mockWhere })
   mockDb.update.mockReturnValue({ set: mockSet } as never)
   return mockSet
@@ -59,7 +56,7 @@ describe('updateProgress', () => {
       totalEpisodes: 24,
       totalChapters: null,
     })
-    const mockSet = mockUpdate(1)
+    const mockSet = mockUpdate()
 
     const result = await updateProgress('user-123', 'entry-123', 10)
 
@@ -77,7 +74,7 @@ describe('updateProgress', () => {
       totalEpisodes: 24,
       totalChapters: null,
     })
-    const mockSet = mockUpdate(1)
+    const mockSet = mockUpdate()
 
     const result = await updateProgress('user-123', 'entry-123', -5)
 
@@ -95,7 +92,7 @@ describe('updateProgress', () => {
       totalEpisodes: 24,
       totalChapters: null,
     })
-    const mockSet = mockUpdate(1)
+    const mockSet = mockUpdate()
 
     const result = await updateProgress('user-123', 'entry-123', 100)
 
@@ -114,7 +111,7 @@ describe('updateProgress', () => {
       totalEpisodes: null,
       totalChapters: 200,
     })
-    const mockSet = mockUpdate(1)
+    const mockSet = mockUpdate()
 
     const result = await updateProgress('user-123', 'entry-123', 300)
 
@@ -133,7 +130,7 @@ describe('updateProgress', () => {
       totalEpisodes: null,
       totalChapters: null,
     })
-    const mockSet = mockUpdate(1)
+    const mockSet = mockUpdate()
 
     const result = await updateProgress('user-123', 'entry-123', 999)
 
@@ -151,7 +148,7 @@ describe('updateProgress', () => {
       totalEpisodes: 24,
       totalChapters: null,
     })
-    const mockSet = mockUpdate(1)
+    const mockSet = mockUpdate()
 
     const result = await updateProgress('user-123', 'entry-123', 24)
 

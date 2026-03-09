@@ -56,7 +56,6 @@ export async function updateProgress(
         eq(trackingEntries.userId, userId),
       ),
     )
-    .returning({ id: trackingEntries.id })
 
   return { success: true, statusChanged: shouldAutoComplete }
 }

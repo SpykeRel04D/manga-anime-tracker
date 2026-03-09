@@ -2,18 +2,19 @@ import type { ReactElement } from 'react'
 
 import type { MediaSearchResult } from '@/modules/tracking/domain/entities/media-search-result'
 
+import type { TrackedEntry } from './actions'
 import { SearchResultCard } from './search-result-card'
 
 interface SearchResultsProps {
   results: MediaSearchResult[]
   query: string
-  trackedIds: number[]
+  trackedEntries: TrackedEntry[]
 }
 
 export function SearchResults({
   results,
   query,
-  trackedIds,
+  trackedEntries,
 }: SearchResultsProps): ReactElement | null {
   if (!query) {
     return null
@@ -34,13 +35,16 @@ export function SearchResults({
 
   return (
     <div className="flex flex-col gap-3">
-      {results.map(result => (
-        <SearchResultCard
-          key={result.id}
-          result={result}
-          isTracked={trackedIds.includes(result.id)}
-        />
-      ))}
+      {results.map(result => {
+        const tracked = trackedEntries.find(t => t.anilistId === result.id)
+        return (
+          <SearchResultCard
+            key={result.id}
+            result={result}
+            trackedEntryId={tracked?.entryId ?? null}
+          />
+        )
+      })}
     </div>
   )
 }

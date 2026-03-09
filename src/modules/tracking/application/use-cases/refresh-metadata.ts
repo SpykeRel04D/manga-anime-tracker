@@ -55,7 +55,6 @@ export async function refreshMetadata(
         eq(trackingEntries.userId, userId),
       ),
     )
-    .returning({ id: trackingEntries.id })
 
   return { success: true, refreshed: true }
 }

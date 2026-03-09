@@ -40,9 +40,15 @@ describe('addTrackingEntry', () => {
     vi.clearAllMocks()
   })
 
-  it('returns success on successful insert', async () => {
-    // Mock: no existing entry found
-    const mockWhere = vi.fn().mockResolvedValue([])
+  it('returns success with entryId on successful insert', async () => {
+    // First call: check for existing entry -> empty
+    // Second call: fetch inserted entry ID -> returns new entry
+    let selectCallCount = 0
+    const mockWhere = vi.fn().mockImplementation(() => {
+      selectCallCount++
+      if (selectCallCount === 1) return Promise.resolve([])
+      return Promise.resolve([{ id: 'new-entry-id' }])
+    })
     const mockFrom = vi.fn().mockReturnValue({ where: mockWhere })
     mockDb.select.mockReturnValue({ from: mockFrom } as never)
 
@@ -52,7 +58,7 @@ describe('addTrackingEntry', () => {
 
     const result = await addTrackingEntry('user-123', validInput)
 
-    expect(result).toEqual({ success: true })
+    expect(result).toEqual({ success: true, entryId: 'new-entry-id' })
     expect(mockDb.insert).toHaveBeenCalled()
   })
 
@@ -69,12 +75,18 @@ describe('addTrackingEntry', () => {
   })
 
   it('passes correct fields to insert', async () => {
-    // Mock: no existing entry found
-    const mockWhere = vi.fn().mockResolvedValue([])
+    // First call: check for existing entry -> empty
+    // Second call: fetch inserted entry ID -> returns new entry
+    let selectCallCount = 0
+    const mockWhere = vi.fn().mockImplementation(() => {
+      selectCallCount++
+      if (selectCallCount === 1) return Promise.resolve([])
+      return Promise.resolve([{ id: 'new-entry-id' }])
+    })
     const mockFrom = vi.fn().mockReturnValue({ where: mockWhere })
     mockDb.select.mockReturnValue({ from: mockFrom } as never)
 
-    // Mock: successful insert - capture the values
+    // Mock: successful insert
     const mockValues = vi.fn().mockResolvedValue([])
     mockDb.insert.mockReturnValue({ values: mockValues } as never)
 
@@ -103,8 +115,14 @@ describe('addTrackingEntry', () => {
       totalChapters: 700,
     }
 
-    // Mock: no existing entry found
-    const mockWhere = vi.fn().mockResolvedValue([])
+    // First call: check for existing entry -> empty
+    // Second call: fetch inserted entry ID -> returns new entry
+    let selectCallCount = 0
+    const mockWhere = vi.fn().mockImplementation(() => {
+      selectCallCount++
+      if (selectCallCount === 1) return Promise.resolve([])
+      return Promise.resolve([{ id: 'new-entry-id' }])
+    })
     const mockFrom = vi.fn().mockReturnValue({ where: mockWhere })
     mockDb.select.mockReturnValue({ from: mockFrom } as never)
 

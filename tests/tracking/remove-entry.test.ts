@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 vi.mock('@/db/drizzle', () => ({
   db: {
+    select: vi.fn(),
     delete: vi.fn(),
   },
 }))
@@ -29,9 +30,14 @@ describe('removeEntry', () => {
   })
 
   it('deletes entry and returns success', async () => {
-    const mockReturning = vi.fn().mockResolvedValue([{ id: 'entry-123' }])
-    const mockWhere = vi.fn().mockReturnValue({ returning: mockReturning })
-    mockDb.delete.mockReturnValue({ where: mockWhere } as never)
+    // Mock select: entry exists
+    const mockSelectWhere = vi.fn().mockResolvedValue([{ id: 'entry-123' }])
+    const mockFrom = vi.fn().mockReturnValue({ where: mockSelectWhere })
+    mockDb.select.mockReturnValue({ from: mockFrom } as never)
+
+    // Mock delete
+    const mockDeleteWhere = vi.fn().mockResolvedValue([])
+    mockDb.delete.mockReturnValue({ where: mockDeleteWhere } as never)
 
     const result = await removeEntry('user-123', 'entry-123')
 
@@ -39,12 +45,14 @@ describe('removeEntry', () => {
   })
 
   it('returns not_found when no matching row', async () => {
-    const mockReturning = vi.fn().mockResolvedValue([])
-    const mockWhere = vi.fn().mockReturnValue({ returning: mockReturning })
-    mockDb.delete.mockReturnValue({ where: mockWhere } as never)
+    // Mock select: entry not found
+    const mockSelectWhere = vi.fn().mockResolvedValue([])
+    const mockFrom = vi.fn().mockReturnValue({ where: mockSelectWhere })
+    mockDb.select.mockReturnValue({ from: mockFrom } as never)
 
     const result = await removeEntry('user-123', 'nonexistent')
 
     expect(result).toEqual({ success: false, error: 'not_found' })
+    expect(mockDb.delete).not.toHaveBeenCalled()
   })
 })

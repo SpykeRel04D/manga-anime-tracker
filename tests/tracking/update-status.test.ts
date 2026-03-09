@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 vi.mock('@/db/drizzle', () => ({
   db: {
+    select: vi.fn(),
     update: vi.fn(),
   },
 }))
@@ -31,9 +32,14 @@ describe('updateStatus', () => {
   })
 
   it('updates status and returns success', async () => {
-    const mockReturning = vi.fn().mockResolvedValue([{ id: 'entry-123' }])
-    const mockWhere = vi.fn().mockReturnValue({ returning: mockReturning })
-    const mockSet = vi.fn().mockReturnValue({ where: mockWhere })
+    // Mock select: entry exists
+    const mockSelectWhere = vi.fn().mockResolvedValue([{ id: 'entry-123' }])
+    const mockFrom = vi.fn().mockReturnValue({ where: mockSelectWhere })
+    mockDb.select.mockReturnValue({ from: mockFrom } as never)
+
+    // Mock update
+    const mockUpdateWhere = vi.fn().mockResolvedValue([])
+    const mockSet = vi.fn().mockReturnValue({ where: mockUpdateWhere })
     mockDb.update.mockReturnValue({ set: mockSet } as never)
 
     const result = await updateStatus('user-123', 'entry-123', 'watching')
@@ -45,10 +51,10 @@ describe('updateStatus', () => {
   })
 
   it('returns not_found when no matching row', async () => {
-    const mockReturning = vi.fn().mockResolvedValue([])
-    const mockWhere = vi.fn().mockReturnValue({ returning: mockReturning })
-    const mockSet = vi.fn().mockReturnValue({ where: mockWhere })
-    mockDb.update.mockReturnValue({ set: mockSet } as never)
+    // Mock select: entry not found
+    const mockSelectWhere = vi.fn().mockResolvedValue([])
+    const mockFrom = vi.fn().mockReturnValue({ where: mockSelectWhere })
+    mockDb.select.mockReturnValue({ from: mockFrom } as never)
 
     const result = await updateStatus('user-123', 'nonexistent', 'completed')
 

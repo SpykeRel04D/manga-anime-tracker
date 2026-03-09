@@ -48,8 +48,7 @@ const mockAdapter = vi.mocked(anilistAdapter)
 const mockDb = vi.mocked(db)
 
 function mockUpdate() {
-  const mockReturning = vi.fn().mockResolvedValue([{ id: 'entry-123' }])
-  const mockWhere = vi.fn().mockReturnValue({ returning: mockReturning })
+  const mockWhere = vi.fn().mockResolvedValue([])
   const mockSet = vi.fn().mockReturnValue({ where: mockWhere })
   mockDb.update.mockReturnValue({ set: mockSet } as never)
   return mockSet

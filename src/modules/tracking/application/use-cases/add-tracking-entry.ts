@@ -14,7 +14,7 @@ export interface AddTrackingEntryInput {
 }
 
 export type AddTrackingEntryResult =
-  | { success: true }
+  | { success: true; entryId: string }
   | { success: false; error: 'already_tracked' | 'not_authenticated' }
 
 export async function addTrackingEntry(
@@ -47,5 +47,16 @@ export async function addTrackingEntry(
     totalChapters: data.totalChapters,
   })
 
-  return { success: true }
+  // Query back for the ID (insert doesn't chain .returning() cleanly with union db type)
+  const inserted = await db
+    .select({ id: trackingEntries.id })
+    .from(trackingEntries)
+    .where(
+      and(
+        eq(trackingEntries.userId, userId),
+        eq(trackingEntries.anilistId, data.anilistId),
+      ),
+    )
+
+  return { success: true, entryId: inserted[0].id }
 }

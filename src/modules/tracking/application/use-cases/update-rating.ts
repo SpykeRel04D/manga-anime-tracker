@@ -16,7 +16,21 @@ export async function updateRating(
     return { success: false, error: 'invalid_rating' }
   }
 
-  const result = await db
+  const existing = await db
+    .select({ id: trackingEntries.id })
+    .from(trackingEntries)
+    .where(
+      and(
+        eq(trackingEntries.id, entryId),
+        eq(trackingEntries.userId, userId),
+      ),
+    )
+
+  if (existing.length === 0) {
+    return { success: false, error: 'not_found' }
+  }
+
+  await db
     .update(trackingEntries)
     .set({ rating, updatedAt: new Date() })
     .where(
@@ -25,11 +39,6 @@ export async function updateRating(
         eq(trackingEntries.userId, userId),
       ),
     )
-    .returning({ id: trackingEntries.id })
-
-  if (result.length === 0) {
-    return { success: false, error: 'not_found' }
-  }
 
   return { success: true }
 }

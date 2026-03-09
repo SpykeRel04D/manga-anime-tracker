@@ -26,7 +26,12 @@ export async function addToTrackingList(
   return addTrackingEntry(session.user.id, data)
 }
 
-export async function getUserTrackedIds(): Promise<number[]> {
+export interface TrackedEntry {
+  anilistId: number
+  entryId: string
+}
+
+export async function getUserTrackedEntries(): Promise<TrackedEntry[]> {
   const session = await auth.api.getSession({
     headers: await headers(),
   })
@@ -36,9 +41,12 @@ export async function getUserTrackedIds(): Promise<number[]> {
   }
 
   const rows = await db
-    .select({ anilistId: trackingEntries.anilistId })
+    .select({
+      anilistId: trackingEntries.anilistId,
+      entryId: trackingEntries.id,
+    })
     .from(trackingEntries)
     .where(eq(trackingEntries.userId, session.user.id))
 
-  return rows.map(row => row.anilistId)
+  return rows
 }

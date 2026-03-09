@@ -3,7 +3,7 @@ import type { ReactElement } from 'react'
 
 import { searchMedia } from '@/modules/tracking/application/use-cases/search-media'
 
-import { getUserTrackedIds } from './actions'
+import { getUserTrackedEntries } from './actions'
 import { SearchInput } from './search-input'
 import { SearchResults } from './search-results'
 import { SearchSkeleton } from './search-skeleton'
@@ -13,12 +13,12 @@ interface SearchPageProps {
 }
 
 async function SearchResultsLoader({ query }: { query: string }): Promise<ReactElement> {
-  const [results, trackedIds] = await Promise.all([
+  const [results, trackedEntries] = await Promise.all([
     searchMedia(query),
-    getUserTrackedIds(),
+    getUserTrackedEntries(),
   ])
 
-  return <SearchResults results={results} query={query} trackedIds={trackedIds} />
+  return <SearchResults results={results} query={query} trackedEntries={trackedEntries} />
 }
 
 export default async function SearchPage(props: SearchPageProps): Promise<ReactElement> {
@@ -37,7 +37,7 @@ export default async function SearchPage(props: SearchPageProps): Promise<ReactE
             <SearchResultsLoader query={q} />
           </Suspense>
         ) : (
-          <SearchResults results={[]} query="" trackedIds={[]} />
+          <SearchResults results={[]} query="" trackedEntries={[]} />
         )}
       </div>
     </main>

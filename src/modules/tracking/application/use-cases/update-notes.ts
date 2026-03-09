@@ -15,7 +15,21 @@ export async function updateNotes(
   // Clean empty state: store empty string as null
   const cleanedNotes = notes === '' ? null : notes
 
-  const result = await db
+  const existing = await db
+    .select({ id: trackingEntries.id })
+    .from(trackingEntries)
+    .where(
+      and(
+        eq(trackingEntries.id, entryId),
+        eq(trackingEntries.userId, userId),
+      ),
+    )
+
+  if (existing.length === 0) {
+    return { success: false, error: 'not_found' }
+  }
+
+  await db
     .update(trackingEntries)
     .set({ notes: cleanedNotes, updatedAt: new Date() })
     .where(
@@ -24,11 +38,6 @@ export async function updateNotes(
         eq(trackingEntries.userId, userId),
       ),
     )
-    .returning({ id: trackingEntries.id })
-
-  if (result.length === 0) {
-    return { success: false, error: 'not_found' }
-  }
 
   return { success: true }
 }
