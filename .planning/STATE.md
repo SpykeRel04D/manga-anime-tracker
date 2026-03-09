@@ -2,19 +2,19 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 3
-current_phase_name: Search and API Integration
+current_phase: 4
+current_phase_name: Core Tracking
 current_plan: 2
-status: executing
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-03-09T13:16:05.679Z"
+status: phase_complete
+stopped_at: Completed 04-02-PLAN.md
+last_updated: "2026-03-09T14:19:07.739Z"
 last_activity: 2026-03-09
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 9
-  completed_plans: 8
-  percent: 86
+  completed_plans: 9
+  percent: 100
 ---
 
 # Project State
@@ -24,19 +24,19 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-08)
 
 **Core value:** Quickly see where I left off on any anime or manga, and never lose track of my watching/reading progress.
-**Current focus:** Phase 3: Search and API Integration
+**Current focus:** Phase 4: Core Tracking (complete)
 
 ## Current Position
 
-Current Phase: 3
-Current Phase Name: Search and API Integration
+Current Phase: 4
+Current Phase Name: Core Tracking
 Total Phases: 5
 Current Plan: 2
 Total Plans in Phase: 2
-Status: Executing
+Status: Phase Complete
 Last Activity: 2026-03-09
 
-Progress: [████████░░] 86%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -64,6 +64,7 @@ Progress: [████████░░] 86%
 | Phase 03 P01 | 3min | 2 tasks | 12 files |
 | Phase 03 P02 | 5min | 2 tasks | 11 files |
 | Phase 04 P01 | 4min | 2 tasks | 17 files |
+| Phase 04 P02 | 5min | 2 tasks | 27 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,8 @@ Recent decisions affecting current work:
 - [Phase 04]: Progress clamping with auto-complete: Math.max(0, Math.min(progress, total ?? Infinity)), status=completed when progress===total
 - [Phase 04]: Empty notes stored as null for clean database state
 - [Phase 04]: lastSyncedAt nullable timestamp (null = never synced, needs refresh)
+- [Phase 04]: Auto-save with useTransition: each field uses its own transition for independent non-blocking saves
+- [Phase 04]: getUserTrackedIds returns {anilistId, entryId} pairs to enable badge-to-edit-page navigation from search cards
 
 ### Pending Todos
 
@@ -111,6 +114,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-09T13:16:05.676Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-03-09T14:19:07.736Z
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None

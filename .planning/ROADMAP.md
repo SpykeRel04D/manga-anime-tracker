@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation and Design System** - Project scaffolding, Docker DX, database, Hexagonal DDD structure, warm dark theme, responsive layout, and placeholder UI (completed 2026-03-08)
 - [x] **Phase 2: Authentication** - Email/password signup, login, and persistent sessions (completed 2026-03-08)
 - [x] **Phase 3: Search and API Integration** - AniList GraphQL adapter with rate limiting, anime/manga search with debounced input (completed 2026-03-08)
-- [ ] **Phase 4: Core Tracking** - Add/remove series, status management, episode/chapter progress, ratings, and notes
+- [x] **Phase 4: Core Tracking** - Add/remove series, status management, episode/chapter progress, ratings, and notes (completed 2026-03-09)
 - [ ] **Phase 5: List UI and Browsing** - Cover image grid with status badges, filtering, sorting, and detail pages
 
 ## Phase Details
@@ -77,11 +77,11 @@ Plans:
   3. User can update current episode (anime) or chapter (manga) using increment, decrement, or direct number input
   4. User can rate any tracked entry on a 1-10 scale and edit or remove the rating
   5. User can add, edit, and view personal notes on any tracked entry
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 04-01-PLAN.md -- Schema migration (lastSyncedAt), all tracking use cases (get, update-status/progress/rating/notes, remove, refresh-metadata), AniList adapter extension, comprehensive TDD tests
-- [ ] 04-02-PLAN.md -- Edit page UI at /tracking/[id] with auto-save (status dropdown, progress stepper, star rating, notes textarea), remove confirmation, metadata refresh, search card integration, visual verification
+- [x] 04-01-PLAN.md -- Schema migration (lastSyncedAt), all tracking use cases (get, update-status/progress/rating/notes, remove, refresh-metadata), AniList adapter extension, comprehensive TDD tests
+- [x] 04-02-PLAN.md -- Edit page UI at /tracking/[id] with auto-save (status dropdown, progress stepper, star rating, notes textarea), remove confirmation, metadata refresh, search card integration, visual verification
 
 ### Phase 5: List UI and Browsing
 **Goal**: Users can visually browse, filter, sort, and inspect their tracked collection -- the cover image grid that is the primary daily interface
@@ -108,5 +108,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 1. Foundation and Design System | 3/3 | Complete   | 2026-03-08 |
 | 2. Authentication | 2/2 | Complete | 2026-03-08 |
 | 3. Search and API Integration | 2/2 | Complete   | 2026-03-08 |
-| 4. Core Tracking | 0/2 | Not started | - |
+| 4. Core Tracking | 2/2 | Complete | 2026-03-09 |
 | 5. List UI and Browsing | 0/2 | Not started | - |
