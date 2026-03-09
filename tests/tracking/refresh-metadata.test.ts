@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Mock getTrackingEntry
 vi.mock('@/modules/tracking/application/use-cases/get-tracking-entry', () => ({
