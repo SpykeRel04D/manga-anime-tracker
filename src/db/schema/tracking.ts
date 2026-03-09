@@ -28,6 +28,7 @@ export const trackingEntries = pgTable('tracking_entries', {
   coverImageUrl: text('cover_image_url'),
   totalEpisodes: integer('total_episodes'),
   totalChapters: integer('total_chapters'),
+  lastSyncedAt: timestamp('last_synced_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 })
