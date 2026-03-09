@@ -21,12 +21,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Tracking
 
-- [ ] **TRCK-01**: User can add an anime or manga to their personal tracking list from search results
-- [ ] **TRCK-02**: User can set status for each entry (Watching, Completed, On Hold, Dropped, Plan to Watch/Read)
-- [ ] **TRCK-03**: User can update current episode (anime) or chapter (manga) with increment, decrement, and direct input
-- [ ] **TRCK-04**: User can rate a tracked entry on a 1-10 scale
-- [ ] **TRCK-05**: User can add or edit personal notes on any tracked entry
-- [ ] **TRCK-06**: User can remove an entry from their tracking list
+- [x] **TRCK-01**: User can add an anime or manga to their personal tracking list from search results
+- [x] **TRCK-02**: User can set status for each entry (Watching, Completed, On Hold, Dropped, Plan to Watch/Read)
+- [x] **TRCK-03**: User can update current episode (anime) or chapter (manga) with increment, decrement, and direct input
+- [x] **TRCK-04**: User can rate a tracked entry on a 1-10 scale
+- [x] **TRCK-05**: User can add or edit personal notes on any tracked entry
+- [x] **TRCK-06**: User can remove an entry from their tracking list
 
 ### List UI
 
@@ -105,12 +105,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRCH-01 | Phase 3: Search and API Integration | Complete |
 | SRCH-02 | Phase 3: Search and API Integration | Complete |
 | SRCH-03 | Phase 3: Search and API Integration | Complete |
-| TRCK-01 | Phase 4: Core Tracking | Pending |
-| TRCK-02 | Phase 4: Core Tracking | Pending |
-| TRCK-03 | Phase 4: Core Tracking | Pending |
-| TRCK-04 | Phase 4: Core Tracking | Pending |
-| TRCK-05 | Phase 4: Core Tracking | Pending |
-| TRCK-06 | Phase 4: Core Tracking | Pending |
+| TRCK-01 | Phase 4: Core Tracking | Complete |
+| TRCK-02 | Phase 4: Core Tracking | Complete |
+| TRCK-03 | Phase 4: Core Tracking | Complete |
+| TRCK-04 | Phase 4: Core Tracking | Complete |
+| TRCK-05 | Phase 4: Core Tracking | Complete |
+| TRCK-06 | Phase 4: Core Tracking | Complete |
 | LIST-01 | Phase 5: List UI and Browsing | Pending |
 | LIST-02 | Phase 5: List UI and Browsing | Pending |
 | LIST-03 | Phase 5: List UI and Browsing | Pending |
