@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
 
-import { Badge } from '@/components/ui/badge'
 import type { TrackingEntry } from '@/modules/tracking/domain/entities/tracking-entry'
 
 interface TrackingCardProps {
@@ -19,12 +18,12 @@ const STATUS_LABELS: Record<TrackingEntry['status'], string> = {
   plan_to_watch: 'Plan to Watch',
 }
 
-const STATUS_CLASSES: Record<TrackingEntry['status'], string> = {
-  watching: 'border-chart-3/30 bg-chart-3/20 text-chart-3',
-  completed: 'border-chart-1/30 bg-chart-1/20 text-chart-1',
-  on_hold: 'border-amber-500/30 bg-amber-500/20 text-amber-500',
-  dropped: 'border-destructive/30 bg-destructive/20 text-destructive',
-  plan_to_watch: 'border-muted-foreground/30 bg-muted-foreground/20 text-muted-foreground',
+const STATUS_COLORS: Record<TrackingEntry['status'], string> = {
+  watching: 'bg-chart-3',
+  completed: 'bg-chart-1',
+  on_hold: 'bg-amber-500',
+  dropped: 'bg-destructive',
+  plan_to_watch: 'bg-muted-foreground',
 }
 
 function getProgressPercent(entry: TrackingEntry): number | null {
@@ -67,14 +66,11 @@ export function TrackingCard({ entry }: TrackingCardProps): ReactElement {
             </div>
           )}
 
-          {/* Status badge */}
-          <div className="absolute top-2 left-2">
-            <Badge
-              variant="outline"
-              className={STATUS_CLASSES[entry.status]}
-            >
+          {/* Status badge — corner-integrated, opaque */}
+          <div className={`absolute top-0 left-0 rounded-br-lg px-2 py-1 ${STATUS_COLORS[entry.status]}`}>
+            <span className="text-[10px] font-semibold text-white">
               {STATUS_LABELS[entry.status]}
-            </Badge>
+            </span>
           </div>
 
           {/* Progress bar */}
@@ -88,8 +84,8 @@ export function TrackingCard({ entry }: TrackingCardProps): ReactElement {
           )}
         </div>
 
-        {/* Title below cover */}
-        <p className="text-foreground line-clamp-2 p-2 text-xs font-medium">
+        {/* Title below cover — fixed height for grid alignment */}
+        <p className="text-foreground line-clamp-2 h-9 p-2 text-xs font-medium">
           {title}
         </p>
       </div>

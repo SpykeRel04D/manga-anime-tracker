@@ -116,7 +116,9 @@ export function FilterBar({ statusCounts }: FilterBarProps): ReactElement {
           onValueChange={(value: string | null) => { if (value !== null) updateParam('sort', value) }}
         >
           <SelectTrigger size="sm" className="w-auto min-w-[120px]">
-            <SelectValue />
+            <SelectValue>
+              {SORT_OPTIONS.find(o => o.value === currentSort)?.label ?? 'Sort'}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent align="end">
             {SORT_OPTIONS.map(option => (
