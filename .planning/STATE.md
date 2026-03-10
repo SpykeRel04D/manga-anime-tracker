@@ -6,8 +6,8 @@ current_phase: 4
 current_phase_name: Core Tracking
 current_plan: 2
 status: completed
-stopped_at: Completed 05-02-PLAN.md (Task 3 visual verification approved)
-last_updated: "2026-03-10T22:37:44.691Z"
+stopped_at: Completed 05-03-PLAN.md — Phase 5 complete
+last_updated: "2026-03-10T22:38:02.158Z"
 last_activity: 2026-03-10
 progress:
   total_phases: 5
@@ -68,6 +68,7 @@ Progress: [██████████] 100%
 | Phase 05 P01 | 5min | 2 tasks | 9 files |
 | Phase 05 P03 | 3min | 2 tasks | 2 files |
 | Phase 05 P02 | 4min | 2 tasks | 6 files |
+| Phase 05 P03 | 3min | 3 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -112,6 +113,8 @@ Recent decisions affecting current work:
 - [Phase 05]: key prop on TrackingGrid (status+mediaType+sort) forces remount on filter change, resetting scroll state
 - [Phase 05]: Native IntersectionObserver with useTransition wrapping fetchTrackingPage for non-blocking infinite scroll
 - [Phase 05]: base-ui render prop pattern: Button render={<Link>} instead of asChild (project-wide base-ui pattern)
+- [Phase 05]: dangerouslySetInnerHTML for synopsis: AniList returns HTML-formatted descriptions with italics and line breaks
+- [Phase 05]: trackedAnilistIds Map fetched lazily — only when details non-null and relations.length > 0 to avoid unnecessary DB query
 
 ### Pending Todos
 
@@ -125,6 +128,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-10T22:37:31.757Z
-Stopped at: Completed 05-02-PLAN.md (Task 3 visual verification approved)
+Last session: 2026-03-10T22:38:02.156Z
+Stopped at: Completed 05-03-PLAN.md — Phase 5 complete
 Resume file: None
