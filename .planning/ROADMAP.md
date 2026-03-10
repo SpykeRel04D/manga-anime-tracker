@@ -92,11 +92,12 @@ Plans:
   2. User can filter their list by status (Watching, Completed, On Hold, Dropped, Plan to Watch/Read) and by type (anime/manga)
   3. User can sort their list by rating, title, or date added
   4. User can click a tracked entry to view a detail page showing full metadata (synopsis, genres, studios/authors, airing status, related series)
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
+- [ ] 05-01-PLAN.md -- Data layer: domain entities (MediaDetails), use cases (getTrackingList, getStatusCounts, getMediaDetails), AniList adapter extension, comprehensive TDD tests
+- [ ] 05-02-PLAN.md -- Home page grid: cover cards with status badges and progress bars, filter/sort toolbar with URL sync, infinite scroll, empty states, visual verification
+- [ ] 05-03-PLAN.md -- Detail page: extended metadata section (synopsis, genres, studios/authors, related series), AniList data integration, visual verification
 
 ## Progress
 
@@ -109,4 +110,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 2. Authentication | 2/2 | Complete | 2026-03-08 |
 | 3. Search and API Integration | 2/2 | Complete   | 2026-03-08 |
 | 4. Core Tracking | 2/2 | Complete | 2026-03-09 |
-| 5. List UI and Browsing | 0/2 | Not started | - |
+| 5. List UI and Browsing | 0/3 | Not started | - |
