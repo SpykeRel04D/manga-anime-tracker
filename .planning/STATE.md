@@ -6,14 +6,14 @@ current_phase: 4
 current_phase_name: Core Tracking
 current_plan: 2
 status: completed
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-03-10T22:18:33.622Z"
+stopped_at: "Checkpoint: Task 3 visual verification of 05-03-PLAN.md"
+last_updated: "2026-03-10T22:24:19.235Z"
 last_activity: 2026-03-10
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 12
-  completed_plans: 10
+  completed_plans: 12
   percent: 100
 ---
 
@@ -66,6 +66,7 @@ Progress: [██████████] 100%
 | Phase 04 P01 | 4min | 2 tasks | 17 files |
 | Phase 04 P02 | 5min | 2 tasks | 27 files |
 | Phase 05 P01 | 5min | 2 tasks | 9 files |
+| Phase 05 P03 | 3min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -105,6 +106,8 @@ Recent decisions affecting current work:
 - [Phase 05]: sql template literal for NULLS LAST: drizzle-orm asc().nullsLast() only valid on ExtraConfigColumn (indexes), not in query orderBy context
 - [Phase 05]: USEFUL_RELATION_TYPES constant exported from media-details entity for reuse in adapter and future UI components
 - [Phase 05]: Promise.all for parallel count + entries queries in getTrackingList for minimal latency
+- [Phase 05]: dangerouslySetInnerHTML for synopsis: AniList returns HTML-formatted descriptions with italics and line breaks
+- [Phase 05]: trackedAnilistIds Map fetched lazily — only when details non-null and relations.length > 0 to avoid unnecessary DB query
 
 ### Pending Todos
 
@@ -118,6 +121,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-10T22:18:33.619Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-03-10T22:24:01.769Z
+Stopped at: Checkpoint: Task 3 visual verification of 05-03-PLAN.md
 Resume file: None
