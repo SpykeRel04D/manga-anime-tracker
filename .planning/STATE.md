@@ -6,14 +6,14 @@ current_phase: 4
 current_phase_name: Core Tracking
 current_plan: 2
 status: completed
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-10T21:45:21.332Z"
-last_activity: 2026-03-09
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-03-10T22:18:33.622Z"
+last_activity: 2026-03-10
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 9
-  completed_plans: 9
+  total_plans: 12
+  completed_plans: 10
   percent: 100
 ---
 
@@ -34,7 +34,7 @@ Total Phases: 5
 Current Plan: 2
 Total Plans in Phase: 2
 Status: Phase Complete
-Last Activity: 2026-03-09
+Last Activity: 2026-03-10
 
 Progress: [██████████] 100%
 
@@ -65,6 +65,7 @@ Progress: [██████████] 100%
 | Phase 03 P02 | 5min | 2 tasks | 11 files |
 | Phase 04 P01 | 4min | 2 tasks | 17 files |
 | Phase 04 P02 | 5min | 2 tasks | 27 files |
+| Phase 05 P01 | 5min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -101,6 +102,9 @@ Recent decisions affecting current work:
 - [Phase 04]: lastSyncedAt nullable timestamp (null = never synced, needs refresh)
 - [Phase 04]: Auto-save with useTransition: each field uses its own transition for independent non-blocking saves
 - [Phase 04]: getUserTrackedIds returns {anilistId, entryId} pairs to enable badge-to-edit-page navigation from search cards
+- [Phase 05]: sql template literal for NULLS LAST: drizzle-orm asc().nullsLast() only valid on ExtraConfigColumn (indexes), not in query orderBy context
+- [Phase 05]: USEFUL_RELATION_TYPES constant exported from media-details entity for reuse in adapter and future UI components
+- [Phase 05]: Promise.all for parallel count + entries queries in getTrackingList for minimal latency
 
 ### Pending Todos
 
@@ -114,6 +118,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-10T21:45:21.329Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-list-ui-and-browsing/05-CONTEXT.md
+Last session: 2026-03-10T22:18:33.619Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: None

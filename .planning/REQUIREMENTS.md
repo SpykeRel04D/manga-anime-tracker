@@ -30,10 +30,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### List UI
 
-- [ ] **LIST-01**: User can view their tracked series as a visual grid of cover images with status badges and progress indicators
-- [ ] **LIST-02**: User can filter their list by status (Watching, Completed, etc.) and type (anime/manga)
-- [ ] **LIST-03**: User can sort their list by rating, title, or date added
-- [ ] **LIST-04**: User can view a detail page for a tracked entry showing full metadata (synopsis, genres, studios/authors, airing status, related series)
+- [x] **LIST-01**: User can view their tracked series as a visual grid of cover images with status badges and progress indicators
+- [x] **LIST-02**: User can filter their list by status (Watching, Completed, etc.) and type (anime/manga)
+- [x] **LIST-03**: User can sort their list by rating, title, or date added
+- [x] **LIST-04**: User can view a detail page for a tracked entry showing full metadata (synopsis, genres, studios/authors, airing status, related series)
 
 ### Design
 
@@ -111,10 +111,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TRCK-04 | Phase 4: Core Tracking | Complete |
 | TRCK-05 | Phase 4: Core Tracking | Complete |
 | TRCK-06 | Phase 4: Core Tracking | Complete |
-| LIST-01 | Phase 5: List UI and Browsing | Pending |
-| LIST-02 | Phase 5: List UI and Browsing | Pending |
-| LIST-03 | Phase 5: List UI and Browsing | Pending |
-| LIST-04 | Phase 5: List UI and Browsing | Pending |
+| LIST-01 | Phase 5: List UI and Browsing | Complete |
+| LIST-02 | Phase 5: List UI and Browsing | Complete |
+| LIST-03 | Phase 5: List UI and Browsing | Complete |
+| LIST-04 | Phase 5: List UI and Browsing | Complete |
 
 **Coverage:**
 - v1 requirements: 24 total
