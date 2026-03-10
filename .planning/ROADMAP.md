@@ -95,9 +95,9 @@ Plans:
 **Plans:** 3/3 plans complete
 
 Plans:
-- [ ] 05-01-PLAN.md -- Data layer: domain entities (MediaDetails), use cases (getTrackingList, getStatusCounts, getMediaDetails), AniList adapter extension, comprehensive TDD tests
-- [ ] 05-02-PLAN.md -- Home page grid: cover cards with status badges and progress bars, filter/sort toolbar with URL sync, infinite scroll, empty states, visual verification
-- [ ] 05-03-PLAN.md -- Detail page: extended metadata section (synopsis, genres, studios/authors, related series), AniList data integration, visual verification
+- [x] 05-01-PLAN.md -- Data layer: domain entities (MediaDetails), use cases (getTrackingList, getStatusCounts, getMediaDetails), AniList adapter extension, comprehensive TDD tests
+- [x] 05-02-PLAN.md -- Home page grid: cover cards with status badges and progress bars, filter/sort toolbar with URL sync, infinite scroll, empty states, visual verification
+- [x] 05-03-PLAN.md -- Detail page: extended metadata section (synopsis, genres, studios/authors, related series), AniList data integration, visual verification
 
 ## Progress
 
