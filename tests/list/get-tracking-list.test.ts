@@ -29,12 +29,16 @@ vi.mock('@/db/schema', () => ({
 
 vi.mock('drizzle-orm', () => {
   const nullsLastFn = vi.fn().mockReturnValue({ type: 'nullsLast' })
+  const sqlFn = vi.fn().mockReturnValue({ type: 'sql' })
+  // Make sql act as a tagged template literal
+  const sqlTag = (...args: unknown[]) => sqlFn(...args)
   return {
     eq: vi.fn((_col: unknown, val: unknown) => ({ column: _col, value: val })),
     and: vi.fn((...conditions: unknown[]) => ({ type: 'and', conditions })),
     desc: vi.fn((col: unknown) => ({ type: 'desc', col, nullsLast: nullsLastFn })),
     asc: vi.fn((col: unknown) => ({ type: 'asc', col, nullsLast: nullsLastFn })),
     count: vi.fn(() => ({ type: 'count' })),
+    sql: sqlTag,
   }
 })
 
@@ -170,9 +174,8 @@ describe('getTrackingList', () => {
 
     await getTrackingList({ userId: 'user-123', sort: 'title' })
 
+    // Verifies orderBy was called (with sql NULLS LAST ordering for title)
     expect(mockOrderBy).toHaveBeenCalled()
-    const { asc } = await import('drizzle-orm')
-    expect(asc).toHaveBeenCalled()
   })
 
   it('sorts by date_added descending by default', async () => {

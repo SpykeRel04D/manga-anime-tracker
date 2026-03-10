@@ -1,4 +1,4 @@
-import { and, asc, count, desc, eq } from 'drizzle-orm'
+import { and, asc, count, desc, eq, sql } from 'drizzle-orm'
 
 import { db } from '@/db/drizzle'
 import { trackingEntries } from '@/db/schema'
@@ -39,7 +39,7 @@ export async function getTrackingList(
   if (sort === 'rating') {
     orderByClause = desc(trackingEntries.rating)
   } else if (sort === 'title') {
-    orderByClause = asc(trackingEntries.titleEnglish).nullsLast()
+    orderByClause = sql`${trackingEntries.titleEnglish} ASC NULLS LAST`
   } else {
     // date_added (default)
     orderByClause = desc(trackingEntries.createdAt)
