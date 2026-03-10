@@ -85,7 +85,7 @@ export function TrackingCard({ entry }: TrackingCardProps): ReactElement {
         </div>
 
         {/* Title below cover — fixed height for grid alignment */}
-        <p className="text-foreground line-clamp-2 h-9 p-2 text-xs font-medium">
+        <p className="text-foreground line-clamp-2 h-10 p-2 text-xs font-medium">
           {title}
         </p>
       </div>
