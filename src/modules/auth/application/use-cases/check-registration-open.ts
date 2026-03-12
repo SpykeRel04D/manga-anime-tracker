@@ -1,3 +1,5 @@
+import { isRegistrationAllowed } from '@/lib/env'
+
 /**
  * Check whether new user registration is currently allowed.
  *
@@ -13,7 +15,7 @@
 export async function checkRegistrationOpen(
   queryExistingUsers: () => Promise<{ id: string }[]>,
 ): Promise<boolean> {
-  if (process.env.ALLOW_REGISTRATION === 'true') {
+  if (isRegistrationAllowed()) {
     return true
   }
 

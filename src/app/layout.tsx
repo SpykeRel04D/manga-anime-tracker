@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import type { ReactElement, ReactNode } from 'react'
 
 import { ThemeProvider } from '@/components/theme-provider'
@@ -7,8 +6,6 @@ import { Toaster } from '@/components/ui/sonner'
 import { siteConfig } from '@/config/site'
 
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -22,7 +19,7 @@ export default function RootLayout({
 }>): ReactElement {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <ThemeProvider>{children}</ThemeProvider>
         <Toaster richColors />
       </body>

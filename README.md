@@ -1,46 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with
-[`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Manga Anime Tracker
 
-## Getting Started
+Personal Next.js app for tracking anime and manga with:
+- Next.js App Router
+- Better Auth with email/password sessions
+- Drizzle ORM
+- PostgreSQL locally and Neon in production
 
-First, run the development server:
+## Local development
+
+1. Copy `.env.example` to `.env.local`.
+2. Start the local PostgreSQL container stack you use for development.
+3. Install dependencies with `pnpm install`.
+4. Run `pnpm dev`.
+
+Required local env vars:
+- `LOCAL_DATABASE_URL`
+- `BETTER_AUTH_URL`
+
+Optional local env vars:
+- `BETTER_AUTH_SECRET`
+- `ALLOW_REGISTRATION`
+
+## Production target
+
+The project is prepared for:
+- App hosting on `Vercel Hobby`
+- Database on `Neon Free`
+- Git-based deploys from `GitHub`
+
+This matches the current runtime model:
+- Next.js server routes and auth handlers require server execution
+- production DB access already uses Neon HTTP in [src/db/drizzle.ts](/home/spykerel04d/Sites/manga-anime-tracker/src/db/drizzle.ts)
+
+## Production environment variables
+
+Set these in Vercel:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+BETTER_AUTH_URL=https://your-project.vercel.app
+BETTER_AUTH_SECRET=<long-random-secret>
+NEON_DATABASE_URL=postgresql://...
+ALLOW_REGISTRATION=false
+NODE_ENV=production
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Notes:
+- `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET`, and `NEON_DATABASE_URL` are treated as required in production.
+- `ALLOW_REGISTRATION=false` keeps signup closed after your first account is created.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you
-edit the file.
+## Database bootstrap
 
-This project uses
-[`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to
-automatically optimize and load [Geist](https://vercel.com/font), a new font family for
-Vercel.
+The repo includes an initial Drizzle migration at [src/db/migrations/0000_glossy_spirit.sql](/home/spykerel04d/Sites/manga-anime-tracker/src/db/migrations/0000_glossy_spirit.sql).
 
-## Learn More
+Recommended flow:
+1. Create a Neon project.
+2. Connect with your Neon SQL editor or `psql`.
+3. Run the SQL from that migration once.
+4. Deploy the app to Vercel.
 
-To learn more about Next.js, take a look at the following resources:
+For future schema changes:
+1. Generate or write a new migration locally.
+2. Review it.
+3. Apply it manually to Neon.
+4. Deploy the app after the schema change is in place.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This keeps production schema changes explicit and safe for a personal app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) -
-your feedback and contributions are welcome!
+## First production login
 
-## Deploy on Vercel
+The app allows signup when either:
+- no users exist yet, or
+- `ALLOW_REGISTRATION=true`
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
+Recommended first-run flow:
+1. Deploy with `ALLOW_REGISTRATION=false`.
+2. Create the first account if signup is open because the database is empty.
+3. If needed, temporarily switch `ALLOW_REGISTRATION=true`, create your account, and set it back to `false`.
 
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
-for more details.
+## Useful commands
+
+```bash
+pnpm dev
+pnpm build
+pnpm test
+pnpm db:generate
+pnpm db:migrate
+pnpm db:push
+```

@@ -5,9 +5,11 @@ import { nextCookies } from 'better-auth/next-js'
 
 import { db } from '@/db/drizzle'
 import * as schema from '@/db/schema'
+import { getAuthBaseUrl, getAuthSecret, isRegistrationAllowed } from '@/lib/env'
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL ?? 'http://localhost:3000',
+  baseURL: getAuthBaseUrl(),
+  secret: getAuthSecret(),
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: {
@@ -45,7 +47,7 @@ export const auth = betterAuth({
     user: {
       create: {
         before: async () => {
-          if (process.env.ALLOW_REGISTRATION === 'true') return
+          if (isRegistrationAllowed()) return
           const existingUsers = await db
             .select({ id: schema.users.id })
             .from(schema.users)

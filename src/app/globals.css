@@ -6,6 +6,8 @@
 
 :root {
   /* Warm dark theme -- only dark mode, no light theme */
+  --font-sans:
+    'Inter', 'Avenir Next', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --radius: 0.75rem;
   --background: oklch(0.17 0.015 60);
   --foreground: oklch(0.93 0.01 80);
