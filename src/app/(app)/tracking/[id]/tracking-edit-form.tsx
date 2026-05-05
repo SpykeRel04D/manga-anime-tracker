@@ -249,7 +249,9 @@ export function TrackingEditForm({ entry }: TrackingEditFormProps): ReactElement
           disabled={isStatusPending}
         >
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Status" />
+            <SelectValue placeholder="Status">
+              {STATUS_OPTIONS.find(o => o.value === status)?.label ?? 'Status'}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>

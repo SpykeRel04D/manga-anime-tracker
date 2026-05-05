@@ -48,7 +48,7 @@ export default async function HomePage({ searchParams }: HomePageProps): Promise
   const validSort: 'rating' | 'title' | 'date_added' =
     rawSort === 'rating' || rawSort === 'title' || rawSort === 'date_added'
       ? rawSort
-      : 'date_added'
+      : 'title'
 
   const [listResult, statusCounts] = await Promise.all([
     getTrackingList({

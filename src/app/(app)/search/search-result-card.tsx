@@ -47,13 +47,8 @@ export function SearchResultCard({
       })
 
       if (response.success) {
-        toast.success(`Added "${result.title}" to your list`, {
-          action: {
-            label: 'Manage',
-            onClick: () => router.push(`/tracking/${response.entryId}`),
-          },
-        })
-        router.refresh()
+        toast.success(`Added "${result.title}" to your list`)
+        router.push(`/tracking/${response.entryId}`)
       } else if (response.error === 'already_tracked') {
         toast.info(`"${result.title}" is already in your list`)
         router.refresh()
