@@ -7,6 +7,7 @@ import { getMediaDetails } from '@/modules/tracking/application/use-cases/get-me
 import { getTrackingEntry } from '@/modules/tracking/application/use-cases/get-tracking-entry'
 import { getUserTrackedEntries } from '@/app/(app)/search/actions'
 
+import { BackToListLink } from './back-to-list-link'
 import { MediaDetailSection } from './media-detail-section'
 import { TrackingEditForm } from './tracking-edit-form'
 
@@ -40,6 +41,10 @@ export default async function TrackingEditPage({
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-6">
+      <div className="mb-4">
+        <BackToListLink />
+      </div>
+
       {details !== null && (
         <div className="mb-6">
           <MediaDetailSection
