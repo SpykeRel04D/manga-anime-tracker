@@ -44,7 +44,7 @@ export function FilterBar({ statusCounts }: FilterBarProps): ReactElement {
 
   const currentStatus = searchParams.get('status') ?? 'all'
   const currentType = searchParams.get('type') ?? 'all'
-  const currentSort = searchParams.get('sort') ?? 'date_added'
+  const currentSort = searchParams.get('sort') ?? 'title'
 
   function updateParam(key: string, value: string): void {
     const params = new URLSearchParams(searchParams.toString())
