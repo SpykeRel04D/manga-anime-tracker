@@ -3,6 +3,7 @@ import {
   type MediaDetails,
   USEFUL_RELATION_TYPES,
 } from '@/modules/tracking/domain/entities/media-details'
+import type { MediaRelations } from '@/modules/tracking/domain/entities/media-relations'
 import {
   type AniListMediaResponse,
   type MediaSearchResult,
@@ -50,6 +51,13 @@ const MEDIA_BY_ID_QUERY = `query ($id: Int!) {
   }
 }`
 
+const MEDIA_RELATIONS_QUERY = `query ($id: Int!) {
+  Media(id: $id) {
+    id
+    relations { edges { relationType node { id } } }
+  }
+}`
+
 const MEDIA_DETAILS_QUERY = `query ($id: Int!) {
   Media(id: $id) {
     description(asHtml: false)
@@ -74,6 +82,21 @@ interface AniListPageResponse {
 
 interface AniListSingleMediaResponse {
   data: { Media: AniListMediaResponse | null }
+  errors?: Array<{ message: string }>
+}
+
+interface AniListMediaRelationsResponse {
+  data: {
+    Media: {
+      id: number
+      relations: {
+        edges: Array<{
+          relationType: string
+          node: { id: number }
+        }>
+      }
+    } | null
+  }
   errors?: Array<{ message: string }>
 }
 
@@ -182,6 +205,48 @@ export class AniListAdapter implements MediaSearchPort {
       return mapAniListMedia(json.data.Media)
     } catch {
       return null // Silent failure on network errors
+    }
+  }
+
+  async getMediaRelations(anilistId: number): Promise<MediaRelations | null> {
+    if (!anilistRateLimiter.tryConsume()) {
+      return null
+    }
+
+    try {
+      const response = await fetch(ANILIST_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          query: MEDIA_RELATIONS_QUERY,
+          variables: { id: anilistId },
+        }),
+        next: { revalidate: 300 },
+      })
+
+      if (!response.ok) {
+        return null
+      }
+
+      const json = (await response.json()) as AniListMediaRelationsResponse
+
+      if (json.errors?.length || !json.data?.Media) {
+        return null
+      }
+
+      const media = json.data.Media
+      return {
+        id: media.id,
+        relations: media.relations.edges.map(edge => ({
+          id: edge.node.id,
+          relationType: edge.relationType,
+        })),
+      }
+    } catch {
+      return null
     }
   }
 

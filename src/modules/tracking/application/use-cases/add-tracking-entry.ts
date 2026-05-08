@@ -2,6 +2,8 @@ import { and, eq } from 'drizzle-orm'
 
 import { db } from '@/db/drizzle'
 import { trackingEntries } from '@/db/schema'
+import { computeFranchiseRoot } from '@/modules/tracking/application/use-cases/compute-franchise-root'
+import { anilistAdapter } from '@/modules/tracking/infrastructure/adapters/anilist-adapter'
 
 export interface AddTrackingEntryInput {
   anilistId: number
@@ -58,5 +60,24 @@ export async function addTrackingEntry(
       ),
     )
 
-  return { success: true, entryId: inserted[0].id }
+  const entryId = inserted[0].id
+
+  // Compute franchise root. On null (rate-limit or fetch failure on the first
+  // hop) leave franchiseRootAnilistId NULL so a later backfill can retry.
+  try {
+    const rootAnilistId = await computeFranchiseRoot({
+      anilistId: data.anilistId,
+      port: anilistAdapter,
+    })
+    if (rootAnilistId !== null) {
+      await db
+        .update(trackingEntries)
+        .set({ franchiseRootAnilistId: rootAnilistId })
+        .where(eq(trackingEntries.id, entryId))
+    }
+  } catch {
+    // Silent failure — entry stays ungrouped until next refresh.
+  }
+
+  return { success: true, entryId }
 }

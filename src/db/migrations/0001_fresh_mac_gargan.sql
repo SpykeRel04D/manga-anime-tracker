@@ -1,0 +1,2 @@
+ALTER TABLE "tracking_entries" ADD COLUMN "franchise_root_anilist_id" integer;--> statement-breakpoint
+CREATE INDEX "tracking_entries_user_franchise_idx" ON "tracking_entries" USING btree ("user_id","franchise_root_anilist_id");

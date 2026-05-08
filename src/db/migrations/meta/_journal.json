@@ -8,6 +8,13 @@
       "when": 1773346359991,
       "tag": "0000_glossy_spirit",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1778243169178,
+      "tag": "0001_fresh_mac_gargan",
+      "breakpoints": true
     }
   ]
 }
