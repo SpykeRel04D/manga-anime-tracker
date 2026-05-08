@@ -13,7 +13,6 @@ const eslintConfig = defineConfig([
     'public/**',
     '.docker/**',
     '.claude/**',
-    '.planning/**',
   ]),
   {
     rules: {
