@@ -12,6 +12,7 @@ export interface TrackingEntry {
   coverImageUrl: string | null
   totalEpisodes: number | null
   totalChapters: number | null
+  franchiseRootAnilistId: number | null
   lastSyncedAt: Date | null
   createdAt: Date
   updatedAt: Date

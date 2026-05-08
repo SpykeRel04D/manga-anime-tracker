@@ -5,16 +5,37 @@ vi.mock('@/db/drizzle', () => ({
   db: {
     select: vi.fn(),
     insert: vi.fn(),
+    update: vi.fn(),
   },
 }))
 
 vi.mock('@/db/schema', () => ({
-  trackingEntries: { id: 'id', userId: 'user_id', anilistId: 'anilist_id' },
+  trackingEntries: {
+    id: 'id',
+    userId: 'user_id',
+    anilistId: 'anilist_id',
+    franchiseRootAnilistId: 'franchise_root_anilist_id',
+  },
 }))
 
 vi.mock('drizzle-orm', () => ({
   eq: vi.fn((_col: unknown, val: unknown) => ({ column: _col, value: val })),
   and: vi.fn((...conditions: unknown[]) => ({ type: 'and', conditions })),
+}))
+
+vi.mock(
+  '@/modules/tracking/application/use-cases/compute-franchise-root',
+  () => ({
+    computeFranchiseRoot: vi
+      .fn()
+      .mockImplementation(async ({ anilistId }: { anilistId: number }) => anilistId),
+  }),
+)
+
+vi.mock('@/modules/tracking/infrastructure/adapters/anilist-adapter', () => ({
+  anilistAdapter: {
+    getMediaRelations: vi.fn().mockResolvedValue(null),
+  },
 }))
 
 import { db } from '@/db/drizzle'
@@ -24,6 +45,12 @@ import {
 } from '@/modules/tracking/application/use-cases/add-tracking-entry'
 
 const mockDb = vi.mocked(db)
+
+function mockUpdate(): void {
+  const mockWhere = vi.fn().mockResolvedValue([])
+  const mockSet = vi.fn().mockReturnValue({ where: mockWhere })
+  mockDb.update.mockReturnValue({ set: mockSet } as never)
+}
 
 const validInput: AddTrackingEntryInput = {
   anilistId: 20,
@@ -55,6 +82,7 @@ describe('addTrackingEntry', () => {
     // Mock: successful insert
     const mockValues = vi.fn().mockResolvedValue([])
     mockDb.insert.mockReturnValue({ values: mockValues } as never)
+    mockUpdate()
 
     const result = await addTrackingEntry('user-123', validInput)
 
@@ -89,6 +117,7 @@ describe('addTrackingEntry', () => {
     // Mock: successful insert
     const mockValues = vi.fn().mockResolvedValue([])
     mockDb.insert.mockReturnValue({ values: mockValues } as never)
+    mockUpdate()
 
     await addTrackingEntry('user-123', validInput)
 
@@ -128,6 +157,7 @@ describe('addTrackingEntry', () => {
 
     const mockValues = vi.fn().mockResolvedValue([])
     mockDb.insert.mockReturnValue({ values: mockValues } as never)
+    mockUpdate()
 
     await addTrackingEntry('user-123', mangaInput)
 

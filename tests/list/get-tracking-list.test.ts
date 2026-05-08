@@ -21,6 +21,7 @@ vi.mock('@/db/schema', () => ({
     coverImageUrl: 'cover_image_url',
     totalEpisodes: 'total_episodes',
     totalChapters: 'total_chapters',
+    franchiseRootAnilistId: 'franchise_root_anilist_id',
     lastSyncedAt: 'last_synced_at',
     createdAt: 'created_at',
     updatedAt: 'updated_at',
@@ -65,11 +66,20 @@ function makeEntry(overrides: Partial<Record<string, unknown>> = {}) {
     coverImageUrl: 'https://example.com/cover.jpg',
     totalEpisodes: 220,
     totalChapters: null,
+    franchiseRootAnilistId: null,
     lastSyncedAt: null,
     createdAt: new Date('2026-01-01'),
     updatedAt: new Date('2026-01-01'),
     ...overrides,
   }
+}
+
+function setupGroupedMock(entries: unknown[]): void {
+  // Grouped path: select -> from -> where -> orderBy (resolves to entries)
+  const mockOrderBy = vi.fn().mockResolvedValue(entries)
+  const mockWhere = vi.fn().mockReturnValue({ orderBy: mockOrderBy })
+  const mockFrom = vi.fn().mockReturnValue({ where: mockWhere })
+  mockDb.select.mockReturnValue({ from: mockFrom } as never)
 }
 
 function setupListMock(entries: unknown[], total = entries.length) {
@@ -217,5 +227,93 @@ describe('getTrackingList', () => {
     expect(mockLimit).toHaveBeenCalledWith(11) // perPage + 1
     const { offset } = mockLimit.mock.results[0].value
     expect(offset).toHaveBeenCalledWith(10) // (page - 1) * perPage = (2-1)*10 = 10
+  })
+
+  describe('groupBySeries=true', () => {
+    it('collapses entries sharing franchiseRootAnilistId into one item with childCount', async () => {
+      const aotS1 = makeEntry({
+        id: 's1',
+        anilistId: 16498,
+        franchiseRootAnilistId: 16498,
+        titleEnglish: 'Attack on Titan',
+        createdAt: new Date('2026-01-01'),
+      })
+      const aotS2 = makeEntry({
+        id: 's2',
+        anilistId: 20958,
+        franchiseRootAnilistId: 16498,
+        titleEnglish: 'Attack on Titan Season 2',
+        createdAt: new Date('2026-01-02'),
+      })
+      const aotS3 = makeEntry({
+        id: 's3',
+        anilistId: 99147,
+        franchiseRootAnilistId: 16498,
+        titleEnglish: 'Attack on Titan Season 3',
+        createdAt: new Date('2026-01-03'),
+      })
+      const standalone = makeEntry({
+        id: 'sl',
+        anilistId: 30,
+        franchiseRootAnilistId: null,
+        titleEnglish: 'Bleach',
+        createdAt: new Date('2026-01-04'),
+      })
+
+      setupGroupedMock([aotS1, aotS2, aotS3, standalone])
+
+      const result = await getTrackingList({
+        userId: 'user-123',
+        groupBySeries: true,
+      })
+
+      expect(result.entries).toHaveLength(2)
+      expect(result.total).toBe(2)
+      const aotGroup = result.entries.find(e => e.anilistId === 16498)
+      const bleachGroup = result.entries.find(e => e.anilistId === 30)
+      expect(aotGroup?.childCount).toBe(3)
+      expect(bleachGroup?.childCount).toBe(1)
+    })
+
+    it('uses anilistId as group key when franchiseRootAnilistId is null', async () => {
+      const a = makeEntry({ id: 'a', anilistId: 1, franchiseRootAnilistId: null })
+      const b = makeEntry({ id: 'b', anilistId: 2, franchiseRootAnilistId: null })
+
+      setupGroupedMock([a, b])
+
+      const result = await getTrackingList({
+        userId: 'user-123',
+        groupBySeries: true,
+      })
+
+      expect(result.entries).toHaveLength(2)
+      expect(result.entries.every(e => e.childCount === 1)).toBe(true)
+    })
+
+    it('picks the root entry as representative when present in the group', async () => {
+      const child = makeEntry({
+        id: 'child',
+        anilistId: 200,
+        franchiseRootAnilistId: 100,
+        titleEnglish: 'Season 2',
+      })
+      const root = makeEntry({
+        id: 'root',
+        anilistId: 100,
+        franchiseRootAnilistId: 100,
+        titleEnglish: 'Season 1',
+      })
+
+      setupGroupedMock([child, root])
+
+      const result = await getTrackingList({
+        userId: 'user-123',
+        groupBySeries: true,
+      })
+
+      expect(result.entries).toHaveLength(1)
+      expect(result.entries[0].id).toBe('root')
+      expect(result.entries[0].childCount).toBe(2)
+    })
   })
 })

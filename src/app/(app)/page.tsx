@@ -3,6 +3,7 @@ import type { ReactElement } from 'react'
 
 import { EmptyState } from '@/components/shared/empty-state'
 import { auth } from '@/lib/auth'
+import { backfillFranchiseRoots } from '@/modules/tracking/application/use-cases/backfill-franchise-roots'
 import { getStatusCounts } from '@/modules/tracking/application/use-cases/get-status-counts'
 import { getTrackingList } from '@/modules/tracking/application/use-cases/get-tracking-list'
 
@@ -10,7 +11,12 @@ import { FilterBar } from './filter-bar'
 import { TrackingGrid } from './tracking-grid'
 
 interface HomePageProps {
-  searchParams: Promise<{ status?: string; type?: string; sort?: string }>
+  searchParams: Promise<{
+    status?: string
+    type?: string
+    sort?: string
+    groupBySeries?: string
+  }>
 }
 
 export default async function HomePage({ searchParams }: HomePageProps): Promise<ReactElement> {
@@ -50,6 +56,12 @@ export default async function HomePage({ searchParams }: HomePageProps): Promise
       ? rawSort
       : 'title'
 
+  const groupBySeries = params.groupBySeries === 'true'
+
+  if (groupBySeries) {
+    await backfillFranchiseRoots(userId)
+  }
+
   const [listResult, statusCounts] = await Promise.all([
     getTrackingList({
       userId,
@@ -57,6 +69,7 @@ export default async function HomePage({ searchParams }: HomePageProps): Promise
       mediaType: validMediaType,
       sort: validSort,
       page: 1,
+      groupBySeries,
     }),
     getStatusCounts(userId),
   ])
@@ -83,13 +96,14 @@ export default async function HomePage({ searchParams }: HomePageProps): Promise
         />
       ) : (
         <TrackingGrid
-          key={`${validStatus}-${validMediaType}-${validSort}`}
+          key={`${validStatus}-${validMediaType}-${validSort}-${groupBySeries}`}
           initialEntries={entries}
           initialHasMore={hasMore}
           currentFilters={{
             status: validStatus,
             mediaType: validMediaType,
             sort: validSort,
+            groupBySeries,
           }}
         />
       )}

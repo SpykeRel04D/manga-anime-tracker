@@ -45,6 +45,7 @@ export function FilterBar({ statusCounts }: FilterBarProps): ReactElement {
   const currentStatus = searchParams.get('status') ?? 'all'
   const currentType = searchParams.get('type') ?? 'all'
   const currentSort = searchParams.get('sort') ?? 'title'
+  const groupBySeries = searchParams.get('groupBySeries') === 'true'
 
   function updateParam(key: string, value: string): void {
     const params = new URLSearchParams(searchParams.toString())
@@ -52,6 +53,16 @@ export function FilterBar({ statusCounts }: FilterBarProps): ReactElement {
       params.delete(key)
     } else {
       params.set(key, value)
+    }
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
+
+  function toggleGroupBySeries(): void {
+    const params = new URLSearchParams(searchParams.toString())
+    if (groupBySeries) {
+      params.delete('groupBySeries')
+    } else {
+      params.set('groupBySeries', 'true')
     }
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
@@ -87,7 +98,7 @@ export function FilterBar({ statusCounts }: FilterBarProps): ReactElement {
         })}
       </div>
 
-      {/* Second row: type toggle + sort dropdown */}
+      {/* Second row: type toggle + group toggle + sort dropdown */}
       <div className="flex items-center justify-between gap-2">
         {/* Type toggle */}
         <div className="flex gap-1">
@@ -110,7 +121,22 @@ export function FilterBar({ statusCounts }: FilterBarProps): ReactElement {
           })}
         </div>
 
-        {/* Sort dropdown */}
+        <div className="flex items-center gap-2">
+          {/* Group by series toggle */}
+          <button
+            type="button"
+            onClick={toggleGroupBySeries}
+            aria-pressed={groupBySeries}
+            className={`rounded-full px-2.5 py-1 text-xs font-medium whitespace-nowrap transition-colors ${
+              groupBySeries
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            Group by series
+          </button>
+
+          {/* Sort dropdown */}
         <Select
           value={currentSort}
           onValueChange={(value: string | null) => { if (value !== null) updateParam('sort', value) }}
@@ -128,6 +154,7 @@ export function FilterBar({ statusCounts }: FilterBarProps): ReactElement {
             ))}
           </SelectContent>
         </Select>
+        </div>
       </div>
     </div>
   )

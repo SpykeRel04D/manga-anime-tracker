@@ -9,6 +9,7 @@ vi.mock('@/modules/tracking/application/use-cases/get-tracking-entry', () => ({
 vi.mock('@/modules/tracking/infrastructure/adapters/anilist-adapter', () => ({
   anilistAdapter: {
     getMediaById: vi.fn(),
+    getMediaRelations: vi.fn().mockResolvedValue(null),
   },
 }))
 
@@ -28,6 +29,7 @@ vi.mock('@/db/schema', () => ({
     coverImageUrl: 'cover_image_url',
     totalEpisodes: 'total_episodes',
     totalChapters: 'total_chapters',
+    franchiseRootAnilistId: 'franchise_root_anilist_id',
     lastSyncedAt: 'last_synced_at',
     updatedAt: 'updated_at',
   },
@@ -93,6 +95,7 @@ describe('refreshMetadata', () => {
       coverImageUrl: 'https://example.com/cover.jpg',
       totalEpisodes: 220,
       totalChapters: null,
+      franchiseRootAnilistId: null,
       lastSyncedAt: null,
       createdAt: new Date('2026-01-01'),
       updatedAt: new Date('2026-01-01'),
@@ -124,6 +127,7 @@ describe('refreshMetadata', () => {
       coverImageUrl: 'https://example.com/cover.jpg',
       totalEpisodes: 220,
       totalChapters: null,
+      franchiseRootAnilistId: null,
       lastSyncedAt: staleDate,
       createdAt: new Date('2026-01-01'),
       updatedAt: new Date('2026-01-01'),
@@ -154,6 +158,7 @@ describe('refreshMetadata', () => {
       coverImageUrl: 'https://example.com/cover.jpg',
       totalEpisodes: 220,
       totalChapters: null,
+      franchiseRootAnilistId: null,
       lastSyncedAt: recentDate,
       createdAt: new Date('2026-01-01'),
       updatedAt: new Date('2026-01-01'),
@@ -182,6 +187,7 @@ describe('refreshMetadata', () => {
       coverImageUrl: 'https://example.com/cover.jpg',
       totalEpisodes: 220,
       totalChapters: null,
+      franchiseRootAnilistId: null,
       lastSyncedAt: recentDate,
       createdAt: new Date('2026-01-01'),
       updatedAt: new Date('2026-01-01'),
@@ -211,6 +217,7 @@ describe('refreshMetadata', () => {
       coverImageUrl: 'https://example.com/cover.jpg',
       totalEpisodes: 220,
       totalChapters: null,
+      franchiseRootAnilistId: null,
       lastSyncedAt: null,
       createdAt: new Date('2026-01-01'),
       updatedAt: new Date('2026-01-01'),

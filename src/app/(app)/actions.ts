@@ -10,6 +10,7 @@ interface FetchTrackingPageParams {
   status?: string
   mediaType?: string
   sort?: string
+  groupBySeries?: boolean
   page: number
 }
 
@@ -22,7 +23,7 @@ export async function fetchTrackingPage(
     return { entries: [], hasMore: false, total: 0 }
   }
 
-  const { status, mediaType, sort, page } = params
+  const { status, mediaType, sort, groupBySeries, page } = params
 
   const validStatus =
     status === 'watching' ||
@@ -48,6 +49,7 @@ export async function fetchTrackingPage(
     status: validStatus,
     mediaType: validMediaType,
     sort: validSort,
+    groupBySeries: groupBySeries === true,
     page,
   })
 }

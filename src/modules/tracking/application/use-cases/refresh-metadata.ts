@@ -2,6 +2,7 @@ import { and, eq } from 'drizzle-orm'
 
 import { db } from '@/db/drizzle'
 import { trackingEntries } from '@/db/schema'
+import { computeFranchiseRoot } from '@/modules/tracking/application/use-cases/compute-franchise-root'
 import { getTrackingEntry } from '@/modules/tracking/application/use-cases/get-tracking-entry'
 import { anilistAdapter } from '@/modules/tracking/infrastructure/adapters/anilist-adapter'
 
@@ -37,6 +38,19 @@ export async function refreshMetadata(
     return { success: true, refreshed: false } // Silent failure
   }
 
+  let franchiseRootAnilistId: number | null = entry.franchiseRootAnilistId
+  try {
+    const computed = await computeFranchiseRoot({
+      anilistId: entry.anilistId,
+      port: anilistAdapter,
+    })
+    if (computed !== null) {
+      franchiseRootAnilistId = computed
+    }
+  } catch {
+    // Keep existing root on failure
+  }
+
   // Update entry with fresh metadata
   await db
     .update(trackingEntries)
@@ -46,6 +60,7 @@ export async function refreshMetadata(
       coverImageUrl: freshData.coverImageUrl,
       totalEpisodes: freshData.episodes,
       totalChapters: freshData.chapters,
+      franchiseRootAnilistId,
       lastSyncedAt: new Date(),
       updatedAt: new Date(),
     })
